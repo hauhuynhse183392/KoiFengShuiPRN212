@@ -50,22 +50,107 @@ namespace KoiFengShuiSystem
 		{
 			loadDataInit();
 		}
+		private async Task<List<KoiVarietyWithColors>> GetKoiWithColors()
+		{
+			var allKoi = await _koiVarietyService.GetKoiVarieties();
+			var koiWithColors = allKoi.Select(koi => new KoiVarietyWithColors
+			{
+				KoiVariety = koi,
+				Colors = koi.TypeColors.Select(tc => new ColorPercentage
+				{
+					ColorId = tc.ColorId,
+					Percentage = tc.Percentage // Assuming there's a Percentage property
+				}).ToList()
+			}).ToList();
+			foreach (var koi in koiWithColors)
+			{
+				Console.WriteLine($"Koi: {koi.KoiVariety.KoiType}, Colors: {koi.ColorsString}");
+			}
+			return koiWithColors;
+		}
+
+		public class KoiVarietyWithColors
+		{
+			public KoiVariety KoiVariety { get; set; }
+			public List<ColorPercentage> Colors { get; set; }
+			public string ColorsString => string.Join(", ", Colors.Select(c => $"{c.ColorId} {c.Percentage}%"));
+		}
+
+		public class ColorPercentage
+		{
+			public string ColorId { get; set; }
+			public double Percentage { get; set; }
+		}
 		private async void loadDataInit()
 		{
-			List<KoiVariety> Koi = await _koiVarietyService.GetKoiVarieties();
+			var KoiList = await _koiVarietyService.GetKoiVarieties();
 			// Gán nguồn dữ liệu cho DataGrid
-			this.KoiGrid.ItemsSource = Koi;
-			this.cmb_element.ItemsSource = await _elementService.GetElement();
+			this.KoiGrid.ItemsSource = KoiList;
+
+			var element = await _elementService.GetElement();
+			var elementWithAll = new List<dynamic> { new { ElementId = "Tất cả" } };
+			elementWithAll.AddRange(element);
+			this.cmb_element.ItemsSource = elementWithAll;
 			this.cmb_element.DisplayMemberPath = "ElementId";
 			this.cmb_element.SelectedValuePath = "ElementId";
-			this.cmb_Color.ItemsSource = await _colorService.GetColors();
+			this.cmb_element.SelectedIndex = 0; // Select "Tất cả" by default
+
+			var Color = await _colorService.GetColors();
+			var listColor = new List<dynamic> { new { ColorId = "Tất cả" } };
+			listColor.AddRange(Color);
+			this.cmb_Color.ItemsSource = listColor;
 			this.cmb_Color.DisplayMemberPath = "ColorId";
 			this.cmb_Color.SelectedValuePath = "ColorId";
+			this.cmb_Color.SelectedIndex = 0;
 
 		}
-		private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+		private async Task<List<KoiVarietyWithColors>> SearchKoi(string color, string element, string koiType)
+		{
+			var allKoi = await this.GetKoiWithColors();
+			var filteredKoi = allKoi.AsQueryable();
+
+			if (color != "Tất cả")
+			{
+				filteredKoi = filteredKoi.Where(k => k.Colors.Any(c => c.ColorId == color));
+			}
+
+			if (element != "Tất cả")
+			{
+				filteredKoi = filteredKoi.Where(k => k.KoiVariety.Element.Equals(element));
+			}
+
+			if (!string.IsNullOrWhiteSpace(koiType))
+			{
+				filteredKoi = filteredKoi.Where(k => k.KoiVariety.KoiType.Contains(koiType, StringComparison.OrdinalIgnoreCase));
+			}
+
+			return filteredKoi.ToList();
+		}
+
+		private async void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
-        }
-    }
+		}
+
+		private async void cmb_element_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			string element = cmb_element.SelectedValue?.ToString() ?? "Tất cả";
+			string color = cmb_Color.SelectedValue?.ToString() ?? "Tất cả";
+			string koitype = txt_koiType.Text;
+
+			var listsearch = await SearchKoi(color, element, koitype);
+			this.KoiGrid.ItemsSource = listsearch;
+		}
+
+		private async void cmb_Color_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			string element = cmb_element.SelectedValue?.ToString() ?? "Tất cả";
+			string color = cmb_Color.SelectedValue?.ToString() ?? "Tất cả";
+			string koitype = txt_koiType.Text;
+
+			var listsearch = await SearchKoi(color, element, koitype);
+			this.KoiGrid.ItemsSource = listsearch;
+		}
+	}
 }

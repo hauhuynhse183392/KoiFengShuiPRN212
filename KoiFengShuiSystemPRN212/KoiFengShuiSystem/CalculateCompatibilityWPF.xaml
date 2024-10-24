@@ -5,39 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="CalculateCompatibilityWPF" Height="1000" Width="1850"
+        Title="CalculateCompatibilityWPF" Height="800" Width="1550"
         WindowStartupLocation = "CenterScreen">
     <Grid x:Name="color">
-        <Label Content="Tính toán độ tương hợp" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" FontSize="36"/>
-        <Label Content="Ngày tháng năm sinh:" HorizontalAlignment="Left" Margin="62,133,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <DatePicker x:Name="birthday" HorizontalAlignment="Left" Margin="290,136,0,0" VerticalAlignment="Top" Height="36" Width="156" FontSize="20"/>
-        <Grid Margin="478,124,1214,747">
+        <Label Content="Tính toán độ tương hợp" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="36" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.437"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-1.492"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label Content="Ngày tháng năm sinh:" HorizontalAlignment="Left" Margin="49,86,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <DatePicker x:Name="birthday" HorizontalAlignment="Left" Margin="53,136,0,0" VerticalAlignment="Top" Height="36" Width="156" FontSize="20"/>
+        <Grid Margin="276,82,1054,598">
             <StackPanel x:Name="Gender" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="Chọn giới tính:" FontSize="22" Margin="0,0,0,10"/>
+                <TextBlock Text="Chọn giới tính:" FontSize="22"/>
                 <RadioButton x:Name="MaleRadioButton" Content="Nam" GroupName="Gender" FontSize="20"/>
                 <RadioButton x:Name="FemaleRadioButton" Content="Nữ" GroupName="Gender" FontSize="20"/>
             </StackPanel>
-        </Grid>          
-        <Grid Margin="345,296,345,98">
-            <DataGrid x:Name="KoiGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,10" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False">
+        </Grid>
+        <Grid Margin="511,219,77,30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="59*"/>
+                <ColumnDefinition Width="226*"/>
+                <ColumnDefinition Width="341*"/>
+                <ColumnDefinition Width="331*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="KoiGrid" Margin="0,0,5,10" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" Grid.ColumnSpan="4">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Koi Type" Binding="{Binding KoiType}" />
+                    <DataGridTextColumn Header="Koi Type" Binding="{Binding KoiVariety.KoiType}" />
                     <DataGridTemplateColumn Header="Image">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Image}" Width="100" Height="100" />
+                                <Image Source="{Binding KoiVariety.Image}" Width="100" Height="100" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding KoiVariety.Description}" Width="*" />
+                    <DataGridTemplateColumn Header="Colors">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding TypeColors}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding ColorId}" Margin="0,0,5,0"/>
+                                                <TextBlock Text="{Binding Percentage, StringFormat={}{0:P0}}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Label Content="Bảng mệnh:" HorizontalAlignment="Left" Margin="778,134,0,0" VerticalAlignment="Top" FontSize="22"/>
-        <ComboBox x:Name="cmb_element" HorizontalAlignment="Left" Margin="925,142,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="cmb_Color" HorizontalAlignment="Left" Margin="1191,143,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Màu sắc:" HorizontalAlignment="Left" Margin="1096,134,0,0" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.342,0.574"/>
-        <Label Content="Tên giống cá:" HorizontalAlignment="Left" Margin="1350,134,0,0" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.342,0.574"/>
-        <TextBox x:Name="koiType" HorizontalAlignment="Left" Margin="1493,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="30"/>
+        <Label Content="Bảng mệnh:" HorizontalAlignment="Left" Margin="532,99,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <ComboBox x:Name="cmb_element" HorizontalAlignment="Left" Margin="679,107,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmb_element_SelectionChanged"/>
+        <ComboBox x:Name="cmb_Color" HorizontalAlignment="Left" Margin="945,108,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cmb_Color_SelectionChanged"/>
+        <Label Content="Màu sắc:" HorizontalAlignment="Left" Margin="850,99,0,0" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.342,0.574"/>
+        <Label Content="Tên giống cá:" HorizontalAlignment="Left" Margin="1104,99,0,0" VerticalAlignment="Top" FontSize="22" RenderTransformOrigin="0.342,0.574"/>
+        <TextBox x:Name="txt_koiType" HorizontalAlignment="Left" Margin="1247,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="30"/>
     </Grid>
 </Window>
