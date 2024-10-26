@@ -37,7 +37,7 @@ namespace FengShuiKoi_DAO
 
         public async Task<List<KoiVariety>> GetKoiVarieties()
         {
-            return await dbContext.KoiVarieties.ToListAsync();
+            return await dbContext.KoiVarieties.Include("TypeColors").ToListAsync();
         }
 
         public async Task<List<KoiVariety>> GetKoiVarietiesByElemnet(string element)
