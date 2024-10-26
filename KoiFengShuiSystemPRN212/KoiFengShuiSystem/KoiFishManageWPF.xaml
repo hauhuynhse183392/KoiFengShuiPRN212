@@ -9,7 +9,7 @@
         WindowStartupLocation = "CenterScreen" Loaded="Window_Loaded">
     <Grid Margin="0,0,0,-6">
         <Label Content="Quản lý cá Koi" HorizontalAlignment="Left" Margin="601,48,0,0" VerticalAlignment="Top" FontSize="36" Height="96" Width="294"/>
-        <DataGrid x:Name="KoiManageGrid" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" Margin="242,292,466,288" Loaded="KoiManageGrid_Loaded">
+        <DataGrid x:Name="KoiManageGrid" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" Margin="242,292,322,288" Loaded="KoiManageGrid_Loaded">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -27,6 +27,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Koi element" Width="100" Binding="{Binding Element}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" />
                 <DataGridTemplateColumn Header="Colors">
                     <DataGridTemplateColumn.CellTemplate>
@@ -47,8 +48,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnAdd" Content="Thêm cá Koi" HorizontalAlignment="Left" Height="75" Margin="365,150,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click"/>
-        <Button x:Name="btnUpdate" Content="Cập nhật cá Koi" HorizontalAlignment="Left" Height="74" Margin="601,150,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btnDelete" Content="Xóa cá Koi" HorizontalAlignment="Center" Height="75" Margin="0,149,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="btnUpdate" Content="Cập nhật cá Koi" HorizontalAlignment="Left" Height="74" Margin="601,150,0,0" VerticalAlignment="Top" Width="100" Click="btnUpdate_Click"/>
+        <Button x:Name="btnDelete" Content="Xóa cá Koi" HorizontalAlignment="Center" Height="75" Margin="0,149,0,0" VerticalAlignment="Top" Width="93" Click="btnDelete_Click"/>
         <Button x:Name="btnClose" Content="Quay lại" HorizontalAlignment="Left" Height="75" Margin="1132,149,0,0" VerticalAlignment="Top" Width="81" Click="btnClose_Click"/>
     </Grid>
 </Window>

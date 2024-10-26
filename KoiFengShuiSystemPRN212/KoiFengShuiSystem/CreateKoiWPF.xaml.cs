@@ -26,6 +26,7 @@ namespace KoiFengShuiSystem
         private readonly IKoiVarietyService _koiVarietyService;
         private readonly IElementService _elementService;
         private ObservableCollection<TypeColor> colors;
+        public KoiVariety EditKoiVariety { get; set; } = null;
         public CreateKoiWPF()
         {
             InitializeComponent();
@@ -34,30 +35,6 @@ namespace KoiFengShuiSystem
             _elementService = new ElementService();
             ListColors.ItemsSource = colors;
         }
-
-
-
-
-        //private async Task btnSave_ClickAsync(object sender, RoutedEventArgs e)
-        //{
-        //    //CandidateProfile candidate = new CandidateProfile();
-        //    //candidate.CandidateId = txtCandidateID.Text;
-        //    //candidate.Fullname = txtFullName.Text;
-        //    //candidate.ProfileUrl = txtProfileURL.Text;
-        //    //candidate.Birthday = DateTime.Parse(txtBirthday.Text);
-        //    //candidate.ProfileShortDescription = txtDescription.Text;
-        //    //candidate.PostingId = cmbPostingID.SelectedValue.ToString();
-        //    //if (_candidateProfileService.AddCandidateProfile(candidate))
-        //    //{
-        //    //    MessageBox.Show("Add successfull");
-        //    //    loadDataInit();
-        //    //}
-        //    //else
-        //    //{
-        //    //    MessageBox.Show("Add unsuccessfull !!!!");
-        //    //}
-            
-        //}
 
         private void btnAddColor_Click(object sender, RoutedEventArgs e)
         {
@@ -94,9 +71,34 @@ namespace KoiFengShuiSystem
         public async Task loadInit()
         {
             this.CmbElement.ItemsSource = await _elementService.GetElement();
-            this.CmbElement.DisplayMemberPath = "ElementID";
-            this.CmbElement.SelectedValuePath = "ElementID";
+            this.CmbElement.DisplayMemberPath = "ElementId";
+            this.CmbElement.SelectedValuePath = "ElementId";
         }
+
+        private async Task fillBox(KoiVariety koi)
+        {
+            if (koi == null)
+            {
+                return;
+            }
+            TxtKoiType.Text = koi.KoiType;
+            TxtKoiType.IsEnabled = false;
+            TxtImage.Text = koi.Image;
+            TxtDescription.Text = koi.Description;
+            CmbElement.SelectedValue = koi.Element;
+
+            colors.Clear();
+
+            foreach (var color in koi.TypeColors)
+            {
+                colors.Add(new TypeColor
+                {
+                    ColorId = color.ColorId,
+                    Percentage = color.Percentage*100,
+                });
+            }
+        }
+
         private void CmbElement_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -106,11 +108,21 @@ namespace KoiFengShuiSystem
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await loadInit();
+            await fillBox(EditKoiVariety);
+            if(EditKoiVariety != null)
+            {
+                CreateKoiLabel.Content = "Cập nhật thông tin giống cá Koi";
+            }
+            else
+            {
+                CreateKoiLabel.Content = "Tạo mới giống cá Koi";
+            }
         }
 
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            var success = false;
             if (string.IsNullOrWhiteSpace(TxtKoiType.Text))
             {
                 MessageBox.Show("Vui lòng nhập loại cá Koi!");
@@ -118,7 +130,7 @@ namespace KoiFengShuiSystem
             }
 
             double totalPercentage = colors.Sum(c => c.Percentage);
-            if (Math.Abs(totalPercentage - 1) > 0.01) // Allow for small floating-point errors
+            if (Math.Abs(totalPercentage - 100) > 0.01) // Allow for small floating-point errors
             {
                 MessageBox.Show($"Tổng phần trăm màu sắc phải bằng 100%. Hiện tại: {totalPercentage}%");
                 return;
@@ -128,7 +140,7 @@ namespace KoiFengShuiSystem
                 KoiType = TxtKoiType.Text,
                 Image = TxtImage.Text,
                 Description = TxtDescription.Text,
-                Element = "Thủy" // Thay thế bằng logic xác định element thực tế
+                Element = CmbElement.Text.ToString() // Thay thế bằng logic xác định element thực tế
             };
 
             var typeColors = colors.Select(c => new TypeColor
@@ -137,16 +149,22 @@ namespace KoiFengShuiSystem
                 ColorId = c.ColorId,
                 Percentage = c.Percentage / 100 // Chuyển đổi lại thành phân số
             }).ToList();
-
-            var success = await _koiVarietyService.AddKoiVariety(koiVariety, typeColors);
+            if (EditKoiVariety == null)
+            {
+                success = await _koiVarietyService.AddKoiVariety(koiVariety, typeColors);
+            }
+            else
+            {
+                success = await _koiVarietyService.UpdateKoiVariety(koiVariety, typeColors);
+            }
             if (success)
             {
-                MessageBox.Show("Thêm cá Koi thành công!");
+                MessageBox.Show(EditKoiVariety == null ?"Thêm cá Koi thành công!" : "Cập nhật cá Koi thành công");
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Thêm cá Koi thất bại.");
+                MessageBox.Show(EditKoiVariety == null ?"Thêm cá Koi thất bại." : "Cập nhật cá Koi thất bại");
             }
         }
     }

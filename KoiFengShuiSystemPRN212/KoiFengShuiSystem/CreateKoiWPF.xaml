@@ -23,7 +23,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Label Content="Create / Update Koi management" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,20"/>
+        <Label x:Name="CreateKoiLabel" Content="Create / Update Koi management" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,20"/>
 
         <Label Content="KoiType" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
         <TextBox x:Name="TxtKoiType" Grid.Row="1" Grid.Column="1" Height="25" Margin="5"/>

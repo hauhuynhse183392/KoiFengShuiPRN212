@@ -16,27 +16,27 @@ using System.Windows.Shapes;
 
 namespace KoiFengShuiSystem
 {
-	/// <summary>
-	/// Interaction logic for KoiFishManageWPF.xaml
-	/// </summary>
-	public partial class KoiFishManageWPF : Window
-	{
-		private readonly IKoiVarietyService _koiVarietyService;
-		public KoiFishManageWPF()
-		{
-			InitializeComponent();
-			_koiVarietyService = new KoiVarietyService();
-		}
+    /// <summary>
+    /// Interaction logic for KoiFishManageWPF.xaml
+    /// </summary>
+    public partial class KoiFishManageWPF : Window
+    {
+        private readonly IKoiVarietyService _koiVarietyService;
+        public KoiFishManageWPF()
+        {
+            InitializeComponent();
+            _koiVarietyService = new KoiVarietyService();
+        }
 
-		public async void loadInit()
-		{
-			List<KoiVariety> koi = await _koiVarietyService.GetKoiVarieties();
-			this.KoiManageGrid.ItemsSource = koi;
-		}
+        public async Task loadInit()
+        {
+            List<KoiVariety> koi = await _koiVarietyService.GetKoiVarieties();
+            this.KoiManageGrid.ItemsSource = koi;
+        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-			this.Close();
+            this.Close();
         }
 
         private void KoiManageGrid_Loaded(object sender, RoutedEventArgs e)
@@ -51,14 +51,45 @@ namespace KoiFengShuiSystem
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-			CreateKoiWPF createKoiWPF = new CreateKoiWPF();
-			createKoiWPF.ShowDialog();
-			loadInit();
+            CreateKoiWPF createKoiWPF = new CreateKoiWPF();
+            createKoiWPF.ShowDialog();
+            loadInit();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-			loadInit();
+            loadInit();
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            KoiVariety? selected = KoiManageGrid.SelectedItem as KoiVariety;
+            if (selected == null)
+            {
+                MessageBox.Show("Vui lòng chọn loại cá Koi để cập nhật", "chọn một loại cá", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            CreateKoiWPF createKoi = new CreateKoiWPF();
+            createKoi.EditKoiVariety = selected;
+            createKoi.ShowDialog();
+            loadInit();
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            KoiVariety? selected = KoiManageGrid.SelectedItem as KoiVariety;
+            if (selected == null)
+            {
+                MessageBox.Show("Vui lòng chọn loại cá Koi để xóa ", "chọn một loại cá", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            MessageBoxResult confirm = MessageBox.Show($"Bạn có chắc muốn xóa cá {selected.KoiType}", "xác nhận ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (confirm == MessageBoxResult.No)
+            {
+                return;
+            }
+            await _koiVarietyService.DeleteKoiVariety(selected.KoiType);
+            await loadInit();
         }
     }
 }

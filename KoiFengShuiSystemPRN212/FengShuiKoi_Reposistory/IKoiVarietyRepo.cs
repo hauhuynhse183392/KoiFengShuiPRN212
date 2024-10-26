@@ -11,6 +11,6 @@ namespace FengShuiKoi_Repository
         Task<List<KoiVariety>> GetKoiVarietiesByElemnet(string element);
         Task<bool> AddKoiVariety(KoiVariety variety, List<TypeColor> colors);
         Task<bool> DeleteKoiVariety(string type);
-        Task<bool> UpdateKoiVariety(KoiVariety updatedKoi);
+        Task<bool> UpdateKoiVariety(KoiVariety updatedKoi, List<TypeColor> colors);
     }
 }
