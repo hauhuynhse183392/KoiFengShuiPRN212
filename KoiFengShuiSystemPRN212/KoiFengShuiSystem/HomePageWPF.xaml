@@ -5,16 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="HomePageWPF" Height="800" Width="1550"
-        WindowStartupLocation="CenterScreen">
-    <Grid x:Name="btn_calculate" Margin="10,6,-10,-6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label Content="HomePage" HorizontalAlignment="Center" Margin="0,237,0,0" VerticalAlignment="Top" FontSize="48" Grid.Column="1" Height="74" Width="242"/>
-        <Button x:Name="btn_consluting" Content="Tư vấn cá theo hồ" HorizontalAlignment="Left" Margin="505,473,0,0" VerticalAlignment="Top" Height="96" Width="144" Click="btn_consluting_Click" FontSize="22" Grid.Column="1"/>
-        <Button Content="Tính độ tương hợp của cá và hồ" HorizontalAlignment="Left" Margin="832,473,0,0" VerticalAlignment="Top" Height="96" Width="254" Click="Button_Click" RenderTransformOrigin="0.5,0.5" FontSize="22" Grid.Column="1">
+        Title="HomePageWPF" Height="1000" Width="1850"
+        WindowStartupLocation = "CenterScreen">
+    <Grid x:Name="btn_calculate">
+        <Label Content="HomePage" HorizontalAlignment="Center" Margin="0,41,0,0" VerticalAlignment="Top" FontSize="48"/>
+        <Button x:Name="btn_consluting" Content="Tư vấn cá theo hồ" HorizontalAlignment="Left" Margin="642,589,0,0" VerticalAlignment="Top" Height="96" Width="144" Click="btn_consluting_Click" FontSize="22"/>
+        <Button Content="Tính độ tương hợp của cá và hồ" HorizontalAlignment="Left" Margin="969,589,0,0" VerticalAlignment="Top" Height="96" Width="254" Click="Button_Click" RenderTransformOrigin="0.5,0.5" FontSize="22">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -24,7 +20,7 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <Button x:Name="btn_logout" Content="Log Out" HorizontalAlignment="Left" Margin="264,248,0,0" VerticalAlignment="Top" Height="74" Width="113" FontSize="22" Click="btn_logout_Click" Grid.Column="1"/>
+        <Button x:Name="btn_logout" Content="Log Out" HorizontalAlignment="Left" Margin="1624,52,0,0" VerticalAlignment="Top" Height="74" Width="113" FontSize="22" Click="btn_logout_Click"/>
 
     </Grid>
 </Window>

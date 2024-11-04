@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="UserManageWPF" Height="800" Width="1550"
+        Title="UserManageWPF" Height="1000" Width="1850"
         WindowStartupLocation = "CenterScreen">
     <Grid>
         
