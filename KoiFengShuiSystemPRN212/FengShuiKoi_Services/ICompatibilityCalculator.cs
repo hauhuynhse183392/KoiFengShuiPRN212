@@ -13,5 +13,7 @@ namespace FengShuiKoi_Services
         Task<double?> CalculateKoiScore(string koiType, string dob);
         Task<double?> CalculateShapeScore(string shapeId, string dob);
         Task<double?> CalculateDirectionScore(string direction, string dob, string gender);
+        Task<string> GetElementByBirthYear(string dob);
+        Task<string> CalculateLife_Palace(string YOB, string Gender);
     }
 }

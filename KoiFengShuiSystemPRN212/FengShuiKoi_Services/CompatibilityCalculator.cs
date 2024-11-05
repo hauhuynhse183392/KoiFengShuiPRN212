@@ -128,5 +128,40 @@ namespace FengShuiKoi_Services
             var point = await _lifePlaceDirectionService.GetLifePlaceDirectionById(lifePlace, direction);
             return point.PointOfDirection * 100;
         }
+
+        public async Task<string> GetElementByBirthYear(string dob)
+        {
+            int year = int.Parse(dob.Substring(0, 4));
+            try
+            {
+                var element = _elementService.GetElementByBirthYear(year);
+                return element;
+            }
+            catch (Exception ex)
+            {
+                return "Định dạng ngày tháng năm không hợp lệ" ;
+            }
+        }
+
+        public async Task<string> CalculateLife_Palace(string YOB, string Gender)
+        {
+            try
+            {
+                int[] lunarDate = await Task.Run(() => LunarCalendarConverter.ConvertSolarToLunar(YOB, 7));
+                if (lunarDate == null)
+                {
+                    return "Không thể tính toán ngày âm lịch cho ngày đã nhập.";
+                }
+                else
+                {
+                    int lunarYear = lunarDate[2];
+                    return (_lifePlaceService.CalculateFate(lunarYear, Gender));
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Định dạng ngày tháng năm không hợp lệ";
+            }
+        }
     }
 }

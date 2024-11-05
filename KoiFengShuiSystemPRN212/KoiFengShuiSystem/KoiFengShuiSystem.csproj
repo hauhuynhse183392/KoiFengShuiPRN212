@@ -9,7 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Calculate.jpg" />
+    <None Remove="Img\Calculate.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FengShuiKoi_Services\FengShuiKoi_Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Calculate.jpg" />
+    <Resource Include="Img\Calculate.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
