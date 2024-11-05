@@ -12,5 +12,6 @@ namespace FengShuiKoi_Services
         Task<bool> AddKoiVariety(KoiVariety variety, List<TypeColor> colors);
         Task<bool> DeleteKoiVariety(string type);
         Task<bool> UpdateKoiVariety(KoiVariety updatedKoi, List<TypeColor> colors);
+        Task<List<KoiVariety>> GetKoiVarietiesByKoiType(string koiType);
     }
 }

@@ -23,7 +23,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Label x:Name="CreateKoiLabel" Content="Create / Update Koi management" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,20"/>
+        <Label x:Name="CreateKoiLabel" Content="Tạo / Sửa cá Koi" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,20"/>
 
         <Label Content="KoiType" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
         <TextBox x:Name="TxtKoiType" Grid.Row="1" Grid.Column="1" Height="25" Margin="5"/>
@@ -41,7 +41,7 @@
 
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,10">
             <Label Content="Color ID:"/>
-            <TextBox x:Name="TxtColorId" Width="150" Height="25" Margin="5,0"/>
+            <ComboBox x:Name="CmbColorId" Width="150" Height="25" Margin="5,0"/>
             <Label Content="Percentage:" VerticalAlignment="Center" Margin="20,0,0,0"/>
             <TextBox x:Name="TxtPercentage" Width="150" Height="25" Margin="5,0"/>
             <Button x:Name="btnAddColor" Content="Add Color" Width="80" Height="25" Margin="20,0,0,0" Click="btnAddColor_Click"/>

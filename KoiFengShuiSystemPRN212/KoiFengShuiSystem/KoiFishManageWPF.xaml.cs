@@ -91,5 +91,12 @@ namespace KoiFengShuiSystem
             await _koiVarietyService.DeleteKoiVariety(selected.KoiType);
             await loadInit();
         }
+
+        private async void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string koiType = txtSearch.Text;
+            var koiTypeList = await _koiVarietyService.GetKoiVarietiesByKoiType(koiType);
+            this.KoiManageGrid.ItemsSource = koiTypeList;
+        }
     }
 }

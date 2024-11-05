@@ -138,5 +138,14 @@ namespace FengShuiKoi_DAO
                 return false;
             }
         }
+
+        public async Task<List<KoiVariety>> GetKoiVarietiesByKoiType(string koiType)
+        {
+            if (string.IsNullOrWhiteSpace(koiType))
+            {
+                return await instance.GetKoiVarieties();
+            }
+            return await dbContext.KoiVarieties.Include(k => k.TypeColors).Where(m => m.KoiType.Contains(koiType)).ToListAsync();
+        }
     }
 }

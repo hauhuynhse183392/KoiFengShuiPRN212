@@ -8,8 +8,14 @@
         Title="KoiFishManageWPF" Height="1000" Width="1850"
         WindowStartupLocation = "CenterScreen" Loaded="Window_Loaded">
     <Grid Margin="0,0,0,-6">
-        <Label Content="Quản lý cá Koi" HorizontalAlignment="Left" Margin="601,48,0,0" VerticalAlignment="Top" FontSize="36" Height="96" Width="294"/>
-        <DataGrid x:Name="KoiManageGrid" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" Margin="242,292,322,288" Loaded="KoiManageGrid_Loaded">
+        <Label Content="Quản lý cá Koi" HorizontalAlignment="Center" Margin="0,48,0,0" VerticalAlignment="Top" FontSize="36"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,150,0,0">
+            <Button x:Name="btnAdd" Content="Thêm cá Koi" Height="75" Width="120" Margin="0,0,30,0" Click="btnAdd_Click"/>
+            <Button x:Name="btnUpdate" Content="Cập nhật cá Koi" Height="75" Width="120" Margin="0,0,30,0" Click="btnUpdate_Click"/>
+            <Button x:Name="btnDelete" Content="Xóa cá Koi" Height="75" Width="120" Margin="0,0,30,0" Click="btnDelete_Click"/>
+            <Button x:Name="btnClose" Content="Quay lại" Height="75" Width="120" Click="btnClose_Click"/>
+        </StackPanel>
+        <DataGrid x:Name="KoiManageGrid" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" Margin="252,398,218,105" Loaded="KoiManageGrid_Loaded">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -47,9 +53,9 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnAdd" Content="Thêm cá Koi" HorizontalAlignment="Left" Height="75" Margin="365,150,0,0" VerticalAlignment="Top" Width="89" Click="btnAdd_Click"/>
-        <Button x:Name="btnUpdate" Content="Cập nhật cá Koi" HorizontalAlignment="Left" Height="74" Margin="601,150,0,0" VerticalAlignment="Top" Width="100" Click="btnUpdate_Click"/>
-        <Button x:Name="btnDelete" Content="Xóa cá Koi" HorizontalAlignment="Center" Height="75" Margin="0,149,0,0" VerticalAlignment="Top" Width="93" Click="btnDelete_Click"/>
-        <Button x:Name="btnClose" Content="Quay lại" HorizontalAlignment="Left" Height="75" Margin="1132,149,0,0" VerticalAlignment="Top" Width="81" Click="btnClose_Click"/>
+        <Label Content="Tìm kiếm cá theo giống" HorizontalAlignment="Left" Margin="357,298,0,0" VerticalAlignment="Top" Height="56" Width="221" FontSize="20"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="604,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" Height="56"/>
+        <Button x:Name="btnSearch" Content="Tìm kiếm" HorizontalAlignment="Left" Height="55" Margin="1105,298,0,0" VerticalAlignment="Top" Width="105" Click="btnSearch_Click"/>
+
     </Grid>
 </Window>
