@@ -9,7 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="hinh-anh-ho-ca-koi-dep_111108115.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FengShuiKoi_Services\FengShuiKoi_Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="hinh-anh-ho-ca-koi-dep_111108115.jpg" />
   </ItemGroup>
 
   <ItemGroup>
