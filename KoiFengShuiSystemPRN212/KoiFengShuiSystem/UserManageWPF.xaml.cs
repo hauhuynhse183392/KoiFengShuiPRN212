@@ -247,6 +247,8 @@ namespace KoiFengShuiSystem
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            AdminWPF adminWPF = new AdminWPF();
+            adminWPF.Show();
         }
 
         private async void btnSearchUserName_Click(object sender, RoutedEventArgs e)

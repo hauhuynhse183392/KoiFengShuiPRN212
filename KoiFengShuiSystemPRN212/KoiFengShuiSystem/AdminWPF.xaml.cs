@@ -24,29 +24,34 @@ namespace KoiFengShuiSystem
 			InitializeComponent();
 		}
 
-		private void btn_ManageUser_Click(object sender, RoutedEventArgs e)
-		{
-			UserManageWPF userManageWPF = new UserManageWPF();
-			userManageWPF.Show();
-		}
+        private void Sidebar_Loaded(object sender, RoutedEventArgs e)
+        {
+         
+        }
 
-		private void btn_ManageKoi_Click(object sender, RoutedEventArgs e)
-		{
-			KoiFishManageWPF koiFishManageWPF = new KoiFishManageWPF();
-			koiFishManageWPF.Show();
-		}
+        //private void btn_ManageUser_Click(object sender, RoutedEventArgs e)
+        //{
+        //	UserManageWPF userManageWPF = new UserManageWPF();
+        //	userManageWPF.Show();
+        //}
 
-		private void btn_ManagePond_Click(object sender, RoutedEventArgs e)
-		{
-			PondManageWPF pondManageWPF = new PondManageWPF();
-			pondManageWPF.Show();
-		}
+        //private void btn_ManageKoi_Click(object sender, RoutedEventArgs e)
+        //{
+        //	KoiFishManageWPF koiFishManageWPF = new KoiFishManageWPF();
+        //	koiFishManageWPF.Show();
+        //}
 
-		private void btn_logout_Click(object sender, RoutedEventArgs e)
-		{
-			LoginWPF loginWPF = new LoginWPF();
-			loginWPF.Show();
-			this.Close();
-		}
-	}
+        //private void btn_ManagePond_Click(object sender, RoutedEventArgs e)
+        //{
+        //	PondManageWPF pondManageWPF = new PondManageWPF();
+        //	pondManageWPF.Show();
+        //}
+
+        //private void btn_logout_Click(object sender, RoutedEventArgs e)
+        //{
+        //	LoginWPF loginWPF = new LoginWPF();
+        //	loginWPF.Show();
+        //	this.Close();
+        //}
+    }
 }
