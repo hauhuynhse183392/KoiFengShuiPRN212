@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,12 +48,19 @@ namespace FengShuiKoi_DAO
         }
         public async Task<List<Shape>> GetShapesAndPoint()
         {
-            return await dbContext.Shapes.Include("PointOfShapes").ToListAsync();
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
+            var shapes = await dbContext.Shapes
+            .Include(s => s.PointOfShapes) 
+            .ToListAsync(); 
+
+            return shapes; 
+
         }
 
 
         public async Task<bool> AddShape(Shape shape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             bool isSuccess = false;
             Shape existingShape = await this.GetShapeById(shape.ShapeId);
             try
@@ -61,6 +69,7 @@ namespace FengShuiKoi_DAO
                 {
                     await dbContext.Shapes.AddAsync(shape);
                     await dbContext.SaveChangesAsync();
+                    dbContext.Entry(shape).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -73,6 +82,7 @@ namespace FengShuiKoi_DAO
 
         public async Task<bool> DeleteShape(string id)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             bool isSuccess = false;
             Shape shape = await this.GetShapeById(id);
             try
@@ -93,16 +103,30 @@ namespace FengShuiKoi_DAO
 
         public async Task<bool> UpdateShape(Shape shape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             bool isSuccess = false;
             try
             {
-                dbContext.Entry<Shape>(shape).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+               
+                var existingEntity = await dbContext.Shapes
+                    .FirstOrDefaultAsync(s => s.ShapeId == shape.ShapeId);
+
+                if (existingEntity != null)
+                {
+                    dbContext.Entry(existingEntity).State = EntityState.Detached; 
+                }
+
+               
+              
+                dbContext.Entry(shape).State = EntityState.Modified; 
+
                 await dbContext.SaveChangesAsync();
+                dbContext.Entry(shape).State = EntityState.Detached;
                 isSuccess = true;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception($"Error updating Shape: {ex.Message}", ex);
             }
             return isSuccess;
         }

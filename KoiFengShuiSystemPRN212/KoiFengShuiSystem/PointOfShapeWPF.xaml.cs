@@ -39,6 +39,9 @@ namespace KoiFengShuiSystem
         {
             this.cbElement.ItemsSource = await _elementService.GetElement();
             this.cbShape.ItemsSource = await _shapeService.GetShapes();
+            this.cbPoint.ItemsSource = new List<double> { 0.25, 0.5, 0.75, 1 };
+            this.cbPoint.DisplayMemberPath = ""; 
+            this.cbPoint.SelectedValuePath = "";
             this.cbElement.DisplayMemberPath = "ElementId";
             this.cbElement.SelectedValuePath = "ElementId";
             this.cbShape.DisplayMemberPath = "ShapeId";
@@ -47,8 +50,11 @@ namespace KoiFengShuiSystem
             this.dtg_PointOfShape.ItemsSource = pointOfShapes;
             this.cbElement.Text = "";
             this.cbShape.Text = "";
-            this.txtPoint.Text = "";
+            this.cbPoint.Text = "";
         }
+    
+
+        
 
         private void btn_Pond_Click(object sender, RoutedEventArgs e)
         {
@@ -77,7 +83,7 @@ namespace KoiFengShuiSystem
                 {
                     cbElement.SelectedValue = pointOfShape.ElementId;
                     cbShape.SelectedValue = pointOfShape.ShapeId;
-                    txtPoint.Text = pointOfShape.Point.ToString();
+                    cbPoint.SelectedValue = pointOfShape.Point;
                 }
             }
         }
@@ -107,43 +113,87 @@ namespace KoiFengShuiSystem
         private async void btn_AddPoint_Click(object sender, RoutedEventArgs e)
         {
             PointOfShape pointOfShape = new PointOfShape();
-            if (string.IsNullOrWhiteSpace(txtPoint.Text))
+            if (string.IsNullOrWhiteSpace(cbPoint.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbElement.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbShape.SelectedValue.ToString()))
             {
-                MessageBox.Show("Point fields are required");
+                MessageBox.Show("Tất cả các trường không được bỏ trống !");
             }
             else
             {
                 pointOfShape.ElementId = cbElement.SelectedValue.ToString();
                 pointOfShape.ShapeId = cbShape.SelectedValue.ToString();
-                pointOfShape.Point = double.Parse(txtPoint.Text);
-                if(pointOfShape.Point != 0.25 && pointOfShape.Point != 0.5 && pointOfShape.Point != 0.75 && pointOfShape.Point != 1)
-                {
-                    MessageBox.Show("The Point Value must be (0.25, 0.5, 0.75, 1)");
-                    return;
-                }
+                pointOfShape.Point = double.Parse(cbPoint.SelectedValue.ToString());
+               
                 var _existPoint = await _pointOfShapeService.GetPointOfShape(pointOfShape.ElementId, pointOfShape.ShapeId);
                 if (_existPoint != null)
                 {
 
-                    MessageBox.Show("Has already this Point Of Shape");
+                    MessageBox.Show("Số điểm của hồ và mệnh này đã tồn tại trong hệ thống");
                     return;
                 }
                 else
                 {
                     if (await _pointOfShapeService.AddPointOfShape(pointOfShape))
                     {
-                        MessageBox.Show("Add successfull");
+                        MessageBox.Show("Thêm điểm của hồ và mệnh thành công");
                         loadDataInit();
                     }
                     else
                     {
-                        MessageBox.Show("Add unsuccessfull");
+                        MessageBox.Show("Thêm điểm của hồ và mệnh thất bại");
 
                     }
                 }
 
 
             }
+        }
+
+        private async void btn_UpdatePoint_Click(object sender, RoutedEventArgs e)
+        {
+            PointOfShape pointOfShape = new PointOfShape();
+            if (string.IsNullOrWhiteSpace(cbPoint.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbElement.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbShape.SelectedValue.ToString()))
+            {
+                MessageBox.Show("Tất cả các trường không được bỏ trống !");
+            }
+            else
+            {
+                pointOfShape.ElementId = cbElement.SelectedValue.ToString();
+                pointOfShape.ShapeId = cbShape.SelectedValue.ToString();
+                pointOfShape.Point = double.Parse(cbPoint.SelectedValue.ToString());
+                
+                var _existPoint = await _pointOfShapeService.GetPointOfShape(pointOfShape.ElementId, pointOfShape.ShapeId);
+                if (_existPoint == null)
+                {
+
+                    MessageBox.Show("Số điểm của hồ và mệnh này chưa tồn tại trong hệ thống");
+                    return;
+                }
+                else
+                {
+                    if (await _pointOfShapeService.UpdatePointOfShape(pointOfShape))
+                    {
+                        MessageBox.Show("Cập nhật điểm thành công");
+                        loadDataInit();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật điểm thất bại");
+
+                    }
+                }
+
+
+            }
+        }
+
+        private async void btn_Search_Click(object sender, RoutedEventArgs e)
+        {
+            this.dtg_PointOfShape.ItemsSource = await _pointOfShapeService.SearchPointOfShapes(cbElement.SelectedValue?.ToString(), cbShape.SelectedValue?.ToString(), cbPoint.SelectedValue != null ? (double?)double.Parse(cbPoint.SelectedValue.ToString()) : null);
+        }
+
+        private void btn_Reset_Click(object sender, RoutedEventArgs e)
+        {
+            loadDataInit();
         }
     }
 }

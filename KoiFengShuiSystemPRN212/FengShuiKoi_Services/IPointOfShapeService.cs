@@ -1,4 +1,5 @@
 ﻿using FengShuiKoi_BO;
+using FengShuiKoi_DAO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,5 +15,6 @@ namespace FengShuiKoi_Services
         Task<List<PointOfShape>> GetGoodShapeByElemnet(string element);
         Task<PointOfShape> GetPointOfShapeByShapeID(string shape);
         Task<bool> DeletePointOfShapeByShapeID(string shapeID);
+        Task<List<PointOfShape>> SearchPointOfShapes(string? Element, string? shapeID, double? point);
     }
 }

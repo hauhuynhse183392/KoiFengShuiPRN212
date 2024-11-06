@@ -5,10 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="PointOfShapeWPF" Height="761" Width="1485"
+        Title="PointOfShapeWPF" Height="1000" Width="1700"
         WindowStartupLocation = "CenterScreen">
-    <Grid>
-        <DataGrid x:Name="dtg_PointOfShape" d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" Height="255" Margin="263,319,0,0" Width="963" SelectionChanged="dtg_PointOfShape_SelectionChanged" >
+    <Grid Background="#F0F8FF">
+        <Label Content="Point Of Shape Management" Margin="0,20,0,20" FontSize="36" HorizontalAlignment="Center"   FontWeight="Bold" Background="{x:Null}">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF6AE6E3" Offset="1"/>
+                    <GradientStop Color="#FF6FDC75" Offset="0.007"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
+        <DataGrid x:Name="dtg_PointOfShape" d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Height="441" Margin="0,413,0,0" Width="1268" SelectionChanged="dtg_PointOfShape_SelectionChanged" >
 
             <DataGrid.Resources >
                 <Style TargetType="DataGridColumnHeader" >
@@ -19,7 +28,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Element" Binding="{Binding ElementId}" Width="300" FontSize="16" >
+                <DataGridTextColumn Header="Element" Binding="{Binding ElementId}" Width="400" FontSize="16" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -28,7 +37,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTextColumn Header="Shape" Binding="{Binding ShapeId}" Width="400" FontSize="16" >
+                <DataGridTextColumn Header="Shape" Binding="{Binding ShapeId}" Width="*" FontSize="16" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -36,7 +45,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Point Of Shape" Binding="{Binding Point}" Width="*" FontSize="16" >
+                <DataGridTextColumn Header="Point Of Shape" Binding="{Binding Point}" Width="400" FontSize="16" >
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -46,20 +55,35 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Point Of Shape Management" Margin="502,13,498,592" FontSize="32"/>
-        <Button x:Name="btn_Search" Content="Search" Margin="848,107,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="164" FontSize="20" />
-        <Button x:Name="btn_Pond" Content="Back Pond Management Page" Margin="85,107,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="250" Click="btn_Pond_Click" FontSize="18"  />
-        <TextBox x:Name="txt_Search" TextWrapping="Wrap"  Margin="502,107,0,0" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="310"/>
-        <Button x:Name="btn_AddPoint" Content="Add Point Of Shape" Margin="179,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="67" Width="176" Click="btn_AddPoint_Click" FontSize="16"/>
-        <Button x:Name="btn_UpdatePoint" Content="Update Point" Margin="0,678,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="67" Width="221" FontSize="16"/>
-        <Button x:Name="btn_DeletePoint" Content="Delete Point Of Shape" Margin="1118,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="67" Width="176" Click="btn_DeletePoint_Click" FontSize="16" />
-        <ComboBox x:Name="cbElement" HorizontalAlignment="Left" Margin="192,213,0,0" VerticalAlignment="Top" Width="176" Height="41" FontSize="18"/>
-        <ComboBox x:Name="cbShape" HorizontalAlignment="Left" Margin="644,213,0,0" VerticalAlignment="Top" Width="222" Height="41" FontSize="18"/>
-        <TextBox x:Name="txtPoint" TextWrapping="Wrap"  Margin="1131,215,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" RenderTransformOrigin="0.5,0.5" Width="176" FontSize="18"/>
 
-        <Label Content="Element" Margin="63,207,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="96" Height="63"/>
-        <Label Content="Shape" Margin="559,212,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="64"/>
-        <Label Content="Point" Margin="1032,213,0,0" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Height="80" Width="75"/>
+        <Button x:Name="btn_Search" Content="Search" Margin="601,307,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="164" FontSize="20" Click="btn_Search_Click" />
 
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,194,0,0" Height="63" Width="1274">
+            <Label Content="Element" FontSize="20" Width="100" Height="50" Margin="0,0,10,0"/>
+
+            <ComboBox x:Name="cbElement" Width="300" Height="41" FontSize="18"/>
+
+            <Label Content="Shape" FontSize="20" Width="90" Height="45" Margin="20,0,10,0"/>
+
+            <ComboBox x:Name="cbShape" Width="320" Height="41" FontSize="18"/>
+
+            <Label Content="Point" FontSize="20" Width="80" Height="44" Margin="20,0,10,0"/>
+
+            <ComboBox x:Name="cbPoint" Width="300" Height="41" FontSize="18"/>
+        </StackPanel>
+
+
+        <Button x:Name="btn_Reset" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="164" FontSize="20" Margin="935,307,0,0" Click="btn_Reset_Click" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,880,0,0" Height="84" Width="900">
+
+
+            <Button x:Name="btn_Pond" Content="Back "  Margin="10" Width="200" Height="40" Click="btn_Pond_Click" FontSize="16"  />
+            <Button x:Name="btn_AddPoint" Content="Add Point Of Shape" Margin="10" Width="200" Height="40" Click="btn_AddPoint_Click" FontSize="16"/>
+            <Button x:Name="btn_UpdatePoint" Content="Update Point" Margin="10" Width="200" Height="40" FontSize="16" Click="btn_UpdatePoint_Click"/>
+            <Button x:Name="btn_DeletePoint" Content="Delete Point Of Shape" Margin="10" Width="200" Height="40" Click="btn_DeletePoint_Click" FontSize="16" />
+        </StackPanel>
     </Grid>
 </Window>

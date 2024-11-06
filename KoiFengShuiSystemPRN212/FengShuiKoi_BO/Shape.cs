@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FengShuiKoi_BO
 {
-    public partial class Shape
+    public partial class Shape 
     {
         public Shape()
         {

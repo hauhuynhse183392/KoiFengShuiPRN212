@@ -5,27 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="PondManageWPF" Height="761" Width="1485"
-        WindowStartupLocation = "CenterScreen">
-    <Grid >
+        Title="Pond Management" Height="1000" Width="1700"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="#F0F8FF">
 
-        <Label Content="Pond Management" Margin="578,23,579,582" FontSize="36"/>
+        <Label Content="Pond Management" Margin="0,20,0,20" FontSize="36" HorizontalAlignment="Center"   FontWeight="Bold" Background="{x:Null}">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF6AE6E3" Offset="1"/>
+                    <GradientStop Color="#FF6FDC75" Offset="0.007"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
 
-        <DataGrid x:Name="dtgPond" d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Height="402" Margin="0,223,0,0" Width="1179">
-            <DataGrid.Resources >
-                <Style TargetType="DataGridColumnHeader" >
-                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="FontSize" Value="20" />
-                    <Setter Property="FontWeight" Value="Bold" />
+        <DataGrid x:Name="dtgPond" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Height="530" Margin="0,138,0,0" Width="1176" SelectionChanged="dtgPond_SelectionChanged">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="20"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Shape" Binding="{Binding ShapeId}" Width="400" FontSize="16" >
+                <DataGridTextColumn Header="Shape" Binding="{Binding ShapeId}" Width="350" FontSize="16">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center" />
-                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
@@ -33,38 +41,48 @@
                 <DataGridTemplateColumn Header="Image Of Shape" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Image}" Width="510" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Source="{Binding Image}" Width="510" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Point Of Shape">
+                <DataGridTemplateColumn Header="Shape and Points" Width="350">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+
                             <ItemsControl ItemsSource="{Binding PointOfShapes}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding ElementId}" Margin="0,0,5,0"/>
-                                            <TextBlock Text="{Binding Point}" />
+                                            <TextBlock Text="{Binding ElementId}" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
+                                            <TextBlock Text="{Binding Point}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btn_AddPond" Content="Add Pond" Margin="179,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="48" Width="176"/>
-        <Button x:Name="btn_UpdatePond" Content="Update Pond" Margin="0,613,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="48" Width="176"/>
-        <Button x:Name="btn_DeletePond" Content="Delete Pond" Margin="1118,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="47" Width="176" Click="btn_DeletePond_Click"/>
-        <Button x:Name="btn_Search" Content="Search" Margin="848,107,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="164" Click="btn_Search_Click" />
-        <Button x:Name="btn_PointOfShape" Content="Manage Point Of Shape" Margin="1206,107,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="180" Click="btn_PointOfShape_Click" />
-        <Button x:Name="btn_Admin" Content="Back Admin Page" Margin="107,107,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="180" Click="btn_Admin_Click" />
-        <TextBox x:Name="txt_Search" TextWrapping="Wrap"  Margin="502,107,0,0" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="310"/>
 
 
 
+        <TextBox x:Name="txtShapeId" Text="Enter Shape ID" Padding="5" Margin="518,765,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="383" Height="40"/>
+        <TextBox x:Name="txtImage" Margin="518,835,0,0" Text="Enter Image Path" Padding="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="383" Height="40"/>
+
+        <Button x:Name="btn_SelectImage" Content="Select Image" Margin="0,835,597,0" Width="150" Height="40" Click="btn_SelectImage_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        <Button x:Name="btn_Search" Content="Search" Margin="0,765,597,0" Width="150" Height="40" Click="btn_Search_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,880,0,0" Height="84" Width="1100">
+            <Button x:Name="btn_AddPond" Content="Add Pond" Margin="10" Width="200" Height="40" Click="btn_AddPond_Click"/>
+            <Button x:Name="btn_UpdatePond" Content="Update Pond" Margin="10" Width="200" Height="40" Click="btn_UpdatePond_Click"/>
+            <Button x:Name="btn_DeletePond" Content="Delete Pond" Margin="10" Width="200" Height="40" Click="btn_DeletePond_Click"/>
+
+            <Button x:Name="btn_PointOfShape" Content="Manage Point Of Shape" Margin="10" Width="200" Height="40" Click="btn_PointOfShape_Click"/>
+            <Button x:Name="btn_Admin" Content="Back Admin Page" Margin="10" Width="200" Height="40" Click="btn_Admin_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
