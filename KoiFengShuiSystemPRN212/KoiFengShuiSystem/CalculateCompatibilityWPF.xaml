@@ -78,14 +78,14 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <ImageBrush ImageSource="/1348333.png"/>
+        <ImageBrush ImageSource="img/1348333.png"/>
     </Window.Background>
 
     <Grid>
         <ScrollViewer>
             <StackPanel Margin="20">
                 <!-- Header -->
-                <TextBlock Text="Calculate Compatibility"
+                <TextBlock Text="Tính toán độ tương hợp"
                            FontSize="28"
                            FontWeight="Bold"
                            Foreground="White"
@@ -186,9 +186,9 @@
                                     Style="{StaticResource ButtonStyle}"
                                     Margin="10,0"/>
                             <Button x:Name="btnReset"
-                                    Content="Reset"
+                                    Content="Đặt lại"
                                     Width="80"
-                                    Style="{StaticResource ButtonStyle}"/>
+                                    Style="{StaticResource ButtonStyle}" Click="btn_Reset"/>
                         </StackPanel>
 
                         <!-- Fish ListView with updated style -->

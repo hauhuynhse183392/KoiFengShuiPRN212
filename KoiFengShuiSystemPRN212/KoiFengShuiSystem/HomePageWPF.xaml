@@ -60,7 +60,7 @@
     <Grid>
         <!-- Background Image -->
         <Grid.Background>
-            <ImageBrush ImageSource="/menu.jpg"
+            <ImageBrush ImageSource="img/menu.jpg"
                         Opacity="1"
                         Stretch="Fill"/>
         </Grid.Background>
@@ -115,7 +115,7 @@
                                     BorderBrush="#00B4B4"
                                     BorderThickness="4">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="/ying-yang-koi-fish-ai-artwork-554.png"
+                                    <ImageBrush ImageSource="img/ying-yang-koi-fish-ai-artwork-554.png"
                                               Stretch="UniformToFill"/>
                                 </Border.Background>
                             </Border>
@@ -153,7 +153,7 @@
                                     BorderBrush="#00B4B4"
                                     BorderThickness="4">
                                 <Border.Background>
-                                    <ImageBrush ImageSource="/hinh-nen-ca-koi-de-thuong_090136675.jpg"
+                                    <ImageBrush ImageSource="img/hinh-nen-ca-koi-de-thuong_090136675.jpg"
                                               Stretch="UniformToFill"/>
                                 </Border.Background>
                             </Border>
