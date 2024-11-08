@@ -2,7 +2,6 @@
 using FengShuiKoi_Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,11 +17,11 @@ using System.Windows.Shapes;
 
 namespace KoiFengShuiSystem
 {
-    /// <summary>
-    /// Interaction logic for UserManageWPF.xaml
-    /// </summary>
-    public partial class UserManageWPF : Window
-    {
+	/// <summary>
+	/// Interaction logic for UserManageWPF.xaml
+	/// </summary>
+	public partial class UserManageWPF : Window
+	{
         private IAccountService accountService;
         private IMemberService memberService;
         public UserManageWPF()
@@ -56,7 +55,7 @@ namespace KoiFengShuiSystem
                     if (member != null)
                     {
                         FullName.Text = member.Name;
-                        Birthday.SelectedDate = member.Birthday; 
+                        Birthday.SelectedDate = member.Birthday;
                     }
                     else
                     {
@@ -106,7 +105,7 @@ namespace KoiFengShuiSystem
             Email.Text = "";
             Status.Text = "Active";
             FullName.Text = "";
-            Birthday.SelectedDate = null; 
+            Birthday.SelectedDate = null;
         }
         private bool IsValidEmail(string email)
         {
@@ -132,7 +131,7 @@ namespace KoiFengShuiSystem
                 if (string.IsNullOrWhiteSpace(field.Value))
                 {
                     MessageBox.Show($"Vui lòng điền đầy đủ thông tin cho {field.Key}.");
-                    return; 
+                    return;
                 }
                 if (!IsValidEmail(Email.Text))
                 {

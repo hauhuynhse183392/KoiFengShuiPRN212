@@ -37,12 +37,37 @@ namespace FengShuiKoi_DAO
 
         public async Task<List<KoiVariety>> GetKoiVarieties()
         {
-            return await dbContext.KoiVarieties.ToListAsync();
+            return await dbContext.KoiVarieties.Include(k => k.TypeColors).ToListAsync();
         }
 
         public async Task<List<KoiVariety>> GetKoiVarietiesByElemnet(string element)
         {
             return await dbContext.KoiVarieties.Where(m => m.Element.Equals(element)).ToListAsync();
+        }
+
+        public async Task<List<KoiVariety>> SearchKoiVarietiesByElementOrTypeOrColorId(string? element, string? koiType, string? colorId)
+        {
+            var query = dbContext.KoiVarieties
+                                 .Include(k => k.TypeColors)
+                                     .ThenInclude(tc => tc.Color)
+                                 .AsQueryable();
+
+            if (!string.IsNullOrEmpty(element))
+            {
+                query = query.Where(k => k.Element.Equals(element));
+            }
+
+            if (!string.IsNullOrEmpty(koiType))
+            {
+                query = query.Where(k => k.KoiType.Contains(koiType));
+            }
+
+            if (!string.IsNullOrEmpty(colorId))
+            {
+                query = query.Where(k => k.TypeColors.Any(tc => tc.ColorId.Equals(colorId)));
+            }
+
+            return await query.ToListAsync();
         }
 
         public async Task<bool> AddKoiVariety(KoiVariety variety)

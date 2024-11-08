@@ -80,7 +80,6 @@ namespace FungShuiKoi_DAO
         {
             return await dbContext.Members.ToListAsync();
         }
-        
 
         public async Task<bool> AddMember(Member member)
         {

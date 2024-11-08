@@ -1,6 +1,5 @@
 ﻿using FengShuiKoi_BO;
 using FengShuiKoi_Repository;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -44,6 +43,5 @@ namespace FengShuiKoi_Services
         {
             return iMemberRepo.GetUsersByAgeGroup();
         }
-       
     }
 }

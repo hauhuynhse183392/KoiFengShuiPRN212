@@ -1,6 +1,5 @@
 ﻿using FengShuiKoi_BO;
 using FungShuiKoi_DAO;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,6 +19,5 @@ namespace FengShuiKoi_Repository
         public Task<bool> UpdateMember(Member updatedMember) => MemberDAO.Instance.UpdateMember(updatedMember);
 
         public Task<Dictionary<string, int>> GetUsersByAgeGroup() => MemberDAO.Instance.GetUsersByAgeGroup();
-      
     }
 }

@@ -7,7 +7,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>  
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <local:Sidebar Grid.Column="0" Loaded="Sidebar_Loaded"/>
@@ -15,7 +15,7 @@
         <!-- Main Content Area -->
         <Grid Grid.Column="1">
             <Label Content="Welcome to the Admin Page" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
-            
+
         </Grid>
     </Grid>
 </Window>

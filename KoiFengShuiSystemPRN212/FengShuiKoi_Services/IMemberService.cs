@@ -1,5 +1,4 @@
 ﻿using FengShuiKoi_BO;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +13,5 @@ namespace FengShuiKoi_Services
         Task<bool> DeleteAccount(string id);
         Task<bool> UpdateMember(Member updatedMember);
         Task<Dictionary<string, int>> GetUsersByAgeGroup();
-     
     }
 }

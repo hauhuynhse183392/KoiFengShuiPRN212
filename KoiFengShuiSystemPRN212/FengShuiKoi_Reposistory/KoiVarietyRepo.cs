@@ -18,5 +18,6 @@ namespace FengShuiKoi_Repository
         public async Task<KoiVariety> GetKoiVarietyByType(string type) => await KoiVarietyDAO.Instance.GetKoiVarietyByType(type);
 
         public async Task<bool> UpdateKoiVariety(KoiVariety updatedKoi) => await KoiVarietyDAO.Instance.UpdateKoiVariety(updatedKoi);
+        public async Task<List<KoiVariety>> SearchKoiVarietiesByElementOrTypeOrColorId(string? element, string? koiType, string? colorId) => await KoiVarietyDAO.Instance.SearchKoiVarietiesByElementOrTypeOrColorId(element, koiType, colorId);
     }
 }
