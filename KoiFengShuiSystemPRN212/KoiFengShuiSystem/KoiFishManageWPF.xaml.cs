@@ -34,21 +34,6 @@ namespace KoiFengShuiSystem
             this.KoiManageGrid.ItemsSource = koi;
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void KoiManageGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             CreateKoiWPF createKoiWPF = new CreateKoiWPF();

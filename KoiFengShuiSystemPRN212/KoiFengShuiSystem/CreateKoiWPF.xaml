@@ -58,6 +58,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="btnRemoveColor" Content="Remove Color" Grid.Row="7" Grid.Column="0" Width="100" Height="25" HorizontalAlignment="Left" Margin="0,10,0,0" Click="btnRemoveColor_Click"/>
+        <Button x:Name="btnRemoveColor" Content="Remove Color" Grid.Row="7" Width="100" Height="25" HorizontalAlignment="Center" Margin="0,10,0,0" Click="btnRemoveColor_Click" VerticalAlignment="Top"/>
     </Grid>
 </Window>
