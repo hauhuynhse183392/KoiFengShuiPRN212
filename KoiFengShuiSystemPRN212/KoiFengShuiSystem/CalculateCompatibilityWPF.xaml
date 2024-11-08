@@ -13,7 +13,7 @@
 
     <Window.Resources>
         <Style x:Key="GroupBoxStyle"
-                TargetType="GroupBox">
+               TargetType="GroupBox">
             <Setter Property="Margin"
                     Value="0,0,0,20"/>
             <Setter Property="Padding"
@@ -36,7 +36,7 @@
         </Style>
 
         <Style x:Key="ButtonStyle"
-                TargetType="Button">
+               TargetType="Button">
             <Setter Property="Background"
                     Value="#4682B4"/>
             <Setter Property="Foreground"
@@ -60,7 +60,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver"
-                        Value="True">
+                         Value="True">
                     <Setter Property="Background"
                             Value="#385D8A"/>
                 </Trigger>
@@ -68,7 +68,7 @@
         </Style>
 
         <Style x:Key="ComboBoxStyle"
-                TargetType="ComboBox">
+               TargetType="ComboBox">
             <Setter Property="Height"
                     Value="30"/>
             <Setter Property="BorderBrush"
@@ -90,14 +90,21 @@
                            FontWeight="Bold"
                            Foreground="White"
                            HorizontalAlignment="Center"
-                           Margin="0,0,0,30" Background="#FF5F59A7"/>
+                           Margin="0,0,0,30"
+                        Background="#FF5F59A7"/>
 
                 <!-- User Information -->
-                <GroupBox Header="Thông Tin Người Dùng" BorderBrush="#FF5F59A7" BorderThickness="1"
-                        Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Thông Tin Người Dùng"
+                        BorderBrush="#FF5F59A7"
+                        BorderThickness="1"
+                          Style="{StaticResource GroupBoxStyle}"
+                        Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="#FCFFFFFF" FontWeight="Bold" Background="#FF4159B7"/>
+                            <TextBlock Text="{Binding}"
+                                    Foreground="#FCFFFFFF"
+                                    FontWeight="Bold"
+                                    Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <Grid Margin="10">
@@ -147,10 +154,17 @@
                 </GroupBox>
 
                 <!-- Fish Selection -->
-                <GroupBox Header="Chọn Loại Cá" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Chọn Loại Cá"
+                        BorderBrush="#FF4159B7"
+                        BorderThickness="1"
+                        Style="{StaticResource GroupBoxStyle}"
+                        Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
+                            <TextBlock Text="{Binding}"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <Grid Margin="10">
@@ -165,21 +179,22 @@
 
                         <!-- Search Controls -->
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal"
-                                Margin="0,0,0,10" Grid.ColumnSpan="2">
+                                    Orientation="Horizontal"
+                                    Margin="0,0,0,10"
+                                Grid.ColumnSpan="2">
                             <ComboBox Width="150"
-                                    Margin="0,0,10,0"
-                                    x:Name="ElementFilter"
+                                      Margin="0,0,10,0"
+                                      x:Name="ElementFilter"
                                       Style="{StaticResource ComboBoxStyle}"/>
                             <ComboBox Width="150"
-                                    Margin="0,0,10,0"
-                                    x:Name="ColorFilter"
+                                      Margin="0,0,10,0"
+                                      x:Name="ColorFilter"
                                       Style="{StaticResource ComboBoxStyle}"/>
                             <TextBox Width="200"
-                                    x:Name="SearchBox"
-                                    Height="30"
+                                     x:Name="SearchBox"
+                                     Height="30"
                                      VerticalContentAlignment="Center"
-                                    Padding="5,0"/>
+                                     Padding="5,0"/>
                             <Button x:Name="btnSearch"
                                     Content="Tìm kiếm"
                                     Width="80"
@@ -188,15 +203,17 @@
                             <Button x:Name="btnReset"
                                     Content="Đặt lại"
                                     Width="80"
-                                    Style="{StaticResource ButtonStyle}" Click="btn_Reset"/>
+                                    Style="{StaticResource ButtonStyle}"
+                                    Click="btn_Reset"/>
                         </StackPanel>
 
                         <!-- Fish ListView with updated style -->
                         <ListView Grid.Row="1"
-                                x:Name="FishListView"
-                                Height="500"
+                                  x:Name="FishListView"
+                                  Height="500"
                                   Background="White"
-                                BorderBrush="#4682B4" Grid.ColumnSpan="2">
+                                  BorderBrush="#4682B4"
+                                Grid.ColumnSpan="2">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Hình ảnh"
@@ -276,10 +293,17 @@
                 </GroupBox>
 
                 <!-- Pond Shape -->
-                <GroupBox Header="Hình Dáng Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Hình Dáng Hồ"
+                        BorderBrush="#FF4159B7"
+                        BorderThickness="1"
+                        Style="{StaticResource GroupBoxStyle}"
+                        Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
+                            <TextBlock Text="{Binding}"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <ItemsControl x:Name="PondShapeList">
@@ -341,17 +365,24 @@
                 </GroupBox>
 
                 <!-- Pond Direction -->
-                <GroupBox Header="Hướng Đặt Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Hướng Đặt Hồ"
+                        BorderBrush="#FF4159B7"
+                        BorderThickness="1"
+                        Style="{StaticResource GroupBoxStyle}"
+                        Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
+                            <TextBlock Text="{Binding}"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <StackPanel Margin="10">
                         <ComboBox x:Name="DirectionComboBox"
-                                Style="{StaticResource ComboBoxStyle}"/>
+                                  Style="{StaticResource ComboBoxStyle}"/>
                         <TextBlock x:Name="DirectionScore"
-                                Margin="0,10,0,0"/>
+                                   Margin="0,10,0,0"/>
                     </StackPanel>
                 </GroupBox>
 
@@ -368,12 +399,17 @@
                 <!-- Results Section -->
                 <GroupBox Header="Kết Quả Phân Tích"
                           x:Name="ResultsSection"
-                          BorderBrush="#FF5F59A7" BorderThickness="1"
-                          Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF"
+                          BorderBrush="#FF5F59A7"
+                        BorderThickness="1"
+                          Style="{StaticResource GroupBoxStyle}"
+                        Background="#CCFFFFFF"
                           Visibility="Collapsed">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
+                            <TextBlock Text="{Binding}"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <StackPanel Margin="10">

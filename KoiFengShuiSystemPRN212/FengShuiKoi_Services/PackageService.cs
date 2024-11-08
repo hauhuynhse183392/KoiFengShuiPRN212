@@ -1,5 +1,6 @@
 ﻿using FengShuiKoi_BO;
 using FengShuiKoi_Repository;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

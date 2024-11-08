@@ -30,20 +30,48 @@ namespace FengShuiKoi_DAO
 
         public async Task<PointOfShape> GetPointOfShape(string element, string shape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             return await dbContext.PointOfShapes.FirstOrDefaultAsync(p => p.ElementId == element && p.ShapeId == shape);
         }
         public async Task<PointOfShape> GetPointOfShapeByShapeID(string shape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             return await dbContext.PointOfShapes.FirstOrDefaultAsync(p => p.ShapeId == shape);
         }
 
         public async Task<List<PointOfShape>> GetPointOfShapes()
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             return await dbContext.PointOfShapes.ToListAsync();
         }
 
+        public async Task<List<PointOfShape>> SearchPointOfShapes(string? Element, string? shapeID, double? point)
+        {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
+            var allPoints = await this.GetPointOfShapes();
+
+            var query = allPoints.AsQueryable();
+
+            if (!string.IsNullOrEmpty(Element))
+            {
+                query = query.Where(p => p.ElementId == Element);
+            }
+
+            if (!string.IsNullOrEmpty(shapeID))
+            {
+                query = query.Where(p => p.ShapeId == shapeID);
+            }
+
+            if (point.HasValue)
+            {
+                query = query.Where(p => p.Point == point.Value);
+            }
+
+            return query.ToList();
+        }
         public async Task<bool> AddPointOfShape(PointOfShape pointOfShape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             bool isSuccess = false;
             PointOfShape existingPointOfShape = await this.GetPointOfShape(pointOfShape.ElementId, pointOfShape.ElementId);
             try
@@ -52,6 +80,7 @@ namespace FengShuiKoi_DAO
                 {
                     await dbContext.PointOfShapes.AddAsync(pointOfShape);
                     await dbContext.SaveChangesAsync();
+                    dbContext.Entry(pointOfShape).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -64,6 +93,7 @@ namespace FengShuiKoi_DAO
 
         public async Task<bool> DeletePointOfShape(string element, string shape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             bool isSuccess = false;
             PointOfShape pointOfShape = await this.GetPointOfShape(element, shape);
             try
@@ -83,12 +113,14 @@ namespace FengShuiKoi_DAO
         }
         public async Task<bool> DeletePointOfShapeByShapeID(string shapeID)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             try
             {
                 var pointsToRemove = await dbContext.PointOfShapes
                     .Where(pos => pos.ShapeId == shapeID)
                     .ToListAsync();
-
+                var shape = await dbContext.Shapes
+                        .FirstOrDefaultAsync(s => s.ShapeId == shapeID);
                 if (pointsToRemove.Any())
                 {
                     dbContext.PointOfShapes.RemoveRange(pointsToRemove);
@@ -111,6 +143,17 @@ namespace FengShuiKoi_DAO
                     }
 
                     await dbContext.SaveChangesAsync();
+
+
+                    return true;
+                }
+                else
+                {
+                    if (shape != null)
+                    {
+                        dbContext.Shapes.Remove(shape);
+                    }
+                    await dbContext.SaveChangesAsync();
                     return true;
                 }
 
@@ -124,11 +167,23 @@ namespace FengShuiKoi_DAO
 
         public async Task<bool> UpdatePointOfShape(PointOfShape pointOfShape)
         {
+            dbContext = new SWP391_FengShuiKoiConsulting_DBContext();
             bool isSuccess = false;
             try
             {
-                dbContext.Entry<PointOfShape>(pointOfShape).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                var existingEntity = await dbContext.PointOfShapes
+                    .FirstOrDefaultAsync(p => p.ElementId == pointOfShape.ElementId && p.ShapeId == pointOfShape.ShapeId);
+
+                if (existingEntity != null)
+                {
+                    dbContext.Entry(existingEntity).State = EntityState.Detached;
+                }
+
+
+                dbContext.Entry(pointOfShape).State = EntityState.Modified;
                 await dbContext.SaveChangesAsync();
+                dbContext.Entry(pointOfShape).State = EntityState.Detached;
                 isSuccess = true;
             }
             catch (Exception ex)
@@ -137,7 +192,6 @@ namespace FengShuiKoi_DAO
             }
             return isSuccess;
         }
-
         public async Task<List<PointOfShape>> GetGoodShapeByElemnet(string element)
         {
             var allShapes = await this.GetPointOfShapes();
