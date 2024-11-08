@@ -40,7 +40,6 @@ namespace KoiFengShuiSystem
 		{
 			PondManageWPF pondManageWPF = new PondManageWPF();
 			pondManageWPF.Show();
-			this.Close();
 		}
 
 		private void btn_logout_Click(object sender, RoutedEventArgs e)

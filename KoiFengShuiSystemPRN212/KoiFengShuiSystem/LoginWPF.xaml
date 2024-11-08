@@ -5,167 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="LoginWPF"
-        Height="600"
-        Width="850"
-        WindowStartupLocation="CenterScreen">
+        Title="LoginWPF" Height="600" Width="850"
+        WindowStartupLocation = "CenterScreen" 
+        >
     <Window.Resources>
-        <LinearGradientBrush x:Key="BackgroundBrush"
-                             StartPoint="0,0"
-                             EndPoint="0,1">
-            <GradientStop Color="#FFFD9462"
-                          Offset="0.2"/>
-            <GradientStop Color="#FFE3C8A7"
-                          Offset="0.8"/>
+        <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFD9462" Offset="0.2" />
+            <GradientStop Color="#FFE3C8A7" Offset="0.8" />
         </LinearGradientBrush>
 
     </Window.Resources>
-    <Grid Background="{StaticResource BackgroundBrush}">
+    <Grid Background="{StaticResource BackgroundBrush}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="44*"/>
             <ColumnDefinition Width="41*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle HorizontalAlignment="Left"
-                   Height="368"
-                   Stroke="Black"
-                   VerticalAlignment="Center"
-                   Width="556"
-                   Fill="White"
-                   RadiusX="20"
-                   RadiusY="20"
-                   Grid.ColumnSpan="2"
-                   Margin="147,0,0,0"/>
+        <Rectangle HorizontalAlignment="Left" Height="368" Stroke="Black" VerticalAlignment="Center" Width="556" Fill="White" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2" Margin="147,0,0,0"/>
 
-        <Image Source="Resources/login.jpg"
-               Stretch="Uniform"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Left"
-               Height="368"
-               Width="400"
-               Margin="147,0,0,0"
-               Grid.ColumnSpan="2">
+        <Image Source="img/login.jpg" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left" Height="368" Width="400" Margin="147,0,0,0" Grid.ColumnSpan="2">
             <Image.Clip>
-                <RectangleGeometry Rect="0,0,556,368"
-                                   RadiusX="20"
-                                   RadiusY="20"/>
+                <RectangleGeometry Rect="0,0,556,368" RadiusX="20" RadiusY="20"/>
             </Image.Clip>
         </Image>
-        <TextBox x:Name="txtUserId"
-                 TextWrapping="Wrap"
-                 Text="Hau"
-                 TextBlock.FontSize="16"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Height="30"
-                 Width="192"
-                 Margin="44,202,0,0"
-                 Grid.Column="1"/>
+        <TextBox x:Name="txtUserId" TextWrapping="Wrap" Text="Hau" TextBlock.FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="192" Margin="44,202,0,0" Grid.Column="1" />
 
-        <TextBox x:Name="txtPass"
-                 TextWrapping="Wrap"
-                 Margin="44,284,0,0"
-                 Text="123"
-                 TextBlock.FontSize="16"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 Height="29"
-                 Width="194"
-                 Grid.Column="1"/>
-        <Button x:Name="BtnLogin"
-                Content="Đăng Nhập"
-                Margin="0,368,0,0"
-                Click="btn_Login_Click"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Height="36"
-                Width="84"
-                Grid.Column="1">
+        <TextBox x:Name="txtPass" TextWrapping="Wrap" Margin="44,284,0,0"  Text="123"  TextBlock.FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="194" Grid.Column="1"/>
+        <Button x:Name="BtnLogin" Content="Đăng Nhập" Margin="0,368,0,0" Click="btn_Login_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="84" Grid.Column="1">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="20">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                    <Border Background="{TemplateBinding Background}" 
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}" 
+                CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Border>
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                                     EndPoint="0,1">
-                    <GradientStop Color="#FF4988F1"
-                                  Offset="0.9"/>
-                    <GradientStop Color="#FFC4ECFF"
-                                  Offset="0.1"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF4988F1" Offset="0.9" />
+                    <GradientStop Color="#FFC4ECFF" Offset="0.1" />
 
                 </LinearGradientBrush>
             </Button.Background>
             <Button.Foreground>White</Button.Foreground>
             <Button.FontWeight>DemiBold</Button.FontWeight>
         </Button>
-        <Label Content="ID "
-               HorizontalAlignment="Left"
-               Margin="363,202,0,0"
-               VerticalAlignment="Top"
-               Height="41"
-               Width="65"
-               FontSize="16"
-               FontFamily="Arial"
-               Foreground="#495aff"
-               FontWeight="DemiBold"/>
-        <Label Content="Mật Khẩu  "
-               HorizontalAlignment="Left"
-               Margin="363,284,0,0"
-               VerticalAlignment="Top"
-               Width="116"
-               Height="41"
-               FontSize="16"
-               FontFamily="Arial"
-               Foreground="#495aff"
-               RenderTransformOrigin="0.157,0.481"
-               FontWeight="DemiBold"
-               Grid.ColumnSpan="2"/>
-        <Label Content="Đăng Nhập "
-               HorizontalAlignment="Left"
-               Margin="25,125,0,0"
-               VerticalAlignment="Top"
-               Height="56"
-               Width="138"
-               FontSize="20"
-               FontFamily="Arial"
-               FontWeight="Bold"
-               Foreground="#FF30C1F3"
-               Grid.Column="1"/>
-        <Button x:Name="btnRegister"
-                Content="Đăng Kí"
-                Margin="121,368,0,0"
-                Click="btnRegister_Click"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Height="36"
-                Width="84"
-                Grid.Column="1">
+        <Label Content="ID " HorizontalAlignment="Left" Margin="363,202,0,0" VerticalAlignment="Top" Height="41" Width="65" 
+   FontSize="16" FontFamily="Arial" Foreground="#495aff" FontWeight="DemiBold"/>
+        <Label Content="Mật Khẩu  " HorizontalAlignment="Left" Margin="363,284,0,0" VerticalAlignment="Top" Width="116" Height="41" 
+   FontSize="16" FontFamily="Arial" Foreground="#495aff" RenderTransformOrigin="0.157,0.481" FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <Label Content="Đăng Nhập " HorizontalAlignment="Left" Margin="25,125,0,0" VerticalAlignment="Top" Height="56" Width="138" 
+   FontSize="20" FontFamily="Arial" FontWeight="Bold" Foreground="#FF30C1F3" Grid.Column="1"/>
+        <Button x:Name="btnRegister" Content="Đăng Kí" Margin="121,368,0,0" Click="btnRegister_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="84" Grid.Column="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="20">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                    <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Border>
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                                     EndPoint="0,1">
-                    <GradientStop Color="#FF4988F1"
-                                  Offset="0.9"/>
-                    <GradientStop Color="#FFC4ECFF"
-                                  Offset="0.1"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF4988F1" Offset="0.9" />
+                    <GradientStop Color="#FFC4ECFF" Offset="0.1" />
 
                 </LinearGradientBrush>
             </Button.Background>

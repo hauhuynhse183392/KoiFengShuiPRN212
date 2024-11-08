@@ -1,4 +1,4 @@
-using FengShuiKoi_BO;
+﻿using FengShuiKoi_BO;
 using FengShuiKoi_Services;
 using Microsoft.Win32;
 using System;
@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+
+
 namespace KoiFengShuiSystem
 {
     /// <summary>
@@ -86,6 +88,10 @@ namespace KoiFengShuiSystem
             }
 
         }
+
+
+
+
         private void dtgPond_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
 

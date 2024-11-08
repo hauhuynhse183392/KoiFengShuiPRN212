@@ -5,190 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="RegisterWPF"
-        Height="600"
-        Width="850"
+        Title="RegisterWPF" Height="600" Width="850"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <LinearGradientBrush x:Key="BackgroundBrush"
-                StartPoint="0,0"
-                EndPoint="0,1">
-            <GradientStop Color="#FFFD9462"
-                    Offset="0.2"/>
-            <GradientStop Color="#FFE3C8A7"
-                    Offset="0.8"/>
+        <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFD9462" Offset="0.2" />
+            <GradientStop Color="#FFE3C8A7" Offset="0.8" />
         </LinearGradientBrush>
 
     </Window.Resources>
-    <Grid Background="{StaticResource BackgroundBrush}">
+    <Grid Background="{StaticResource BackgroundBrush}" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="44*"/>
             <ColumnDefinition Width="41*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle HorizontalAlignment="Left"
-                Height="368"
-                Stroke="Black"
-                VerticalAlignment="Center"
-                Width="556"
-                Fill="White"
-                RadiusX="20"
-                RadiusY="20"
-                Grid.ColumnSpan="2"
-                Margin="147,0,0,0"/>
+        <Rectangle HorizontalAlignment="Left" Height="368" Stroke="Black" VerticalAlignment="Center" Width="556" Fill="White" RadiusX="20" RadiusY="20" Grid.ColumnSpan="2" Margin="147,0,0,0"/>
 
-        <Image Source="Resources/login.jpg"
-                Stretch="Uniform"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Left"
-                Height="368"
-                Width="400"
-                Margin="147,0,0,0"
-                Grid.ColumnSpan="2">
+        <Image Source="img/login.jpg" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left" Height="368" Width="400" Margin="147,0,0,0" Grid.ColumnSpan="2">
             <Image.Clip>
-                <RectangleGeometry Rect="0,0,556,368"
-                        RadiusX="20"
-                        RadiusY="20"/>
+                <RectangleGeometry Rect="0,0,556,368" RadiusX="20" RadiusY="20"/>
             </Image.Clip>
         </Image>
-        <Label Content="Đăng Kí"
-                HorizontalAlignment="Left"
-                Margin="44,108,0,0"
-                VerticalAlignment="Top"
-                Width="126"
-                FontSize="22"
-                Grid.Column="1"
-                FontFamily="Arial"
-                Foreground="#FF32C7E0"
-                FontWeight="DemiBold"/>
-        <Label x:Name="UserID"
-                Content="ID "
-                HorizontalAlignment="Left"
-                Margin="374,162,0,0"
-                VerticalAlignment="Top"
-                Height="39"
-                Width="77"
-                FontSize="14"
-                FontFamily="Arial"
-                Foreground="#495aff"
-                FontWeight="DemiBold"
-                Grid.ColumnSpan="2"/>
-        <Label x:Name="Password"
-                Content="Mật Khẩu "
-                HorizontalAlignment="Left"
-                Margin="374,259,0,0"
-                VerticalAlignment="Top"
-                Height="40"
-                Width="93"
-                FontSize="14"
-                FontFamily="Arial"
-                Foreground="#495aff"
-                FontWeight="DemiBold"
-                Grid.ColumnSpan="2"/>
-        <Label x:Name="Email"
-                Content="Email"
-                HorizontalAlignment="Left"
-                Margin="374,305,0,0"
-                VerticalAlignment="Top"
-                Height="40"
-                Width="72"
-                FontSize="14"
-                FontFamily="Arial"
-                Foreground="#495aff"
-                FontWeight="DemiBold"
-                Grid.ColumnSpan="2"/>
-        <Label x:Name="Name"
-                Content="Họ và Tên&#xD;&#xA;"
-                HorizontalAlignment="Left"
-                Margin="374,206,0,0"
-                VerticalAlignment="Top"
-                Height="42"
-                Width="87"
-                FontSize="14"
-                FontFamily="Arial"
-                Foreground="#495aff"
-                FontWeight="DemiBold"
-                Grid.ColumnSpan="2"/>
-        <Label Content="Birthday"
-                HorizontalAlignment="Left"
-                Margin="374,354,0,0"
-                VerticalAlignment="Top"
-                Height="39"
-                Width="87"
-                FontSize="14"
-                FontFamily="Arial"
-                Foreground="#495aff"
-                FontWeight="DemiBold"
-                Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtUserid"
-                HorizontalAlignment="Left"
-                Margin="44,162,0,0"
-                TextWrapping="Wrap"
-                VerticalAlignment="Top"
-                Width="186"
-                Height="27"
-                Grid.Column="1"/>
-        <TextBox x:Name="txtPass"
-                HorizontalAlignment="Left"
-                Margin="44,259,0,0"
-                TextWrapping="Wrap"
-                VerticalAlignment="Top"
-                Width="186"
-                Height="28"
-                Grid.Column="1"/>
-        <TextBox x:Name="txtEmail"
-                HorizontalAlignment="Left"
-                Margin="44,309,0,0"
-                TextWrapping="Wrap"
-                VerticalAlignment="Top"
-                Width="186"
-                Height="27"
-                Grid.Column="1"
-                RenderTransformOrigin="0.5,0.5">
+        <Label Content="Đăng Kí" HorizontalAlignment="Left" Margin="44,108,0,0" VerticalAlignment="Top" Width="126" FontSize="22" Grid.Column="1" FontFamily="Arial" Foreground="#FF32C7E0"  FontWeight="DemiBold"/>
+        <Label x:Name="UserID" Content="ID " HorizontalAlignment="Left" Margin="374,162,0,0" VerticalAlignment="Top" Height="39" Width="77" FontSize="14" FontFamily="Arial" Foreground="#495aff"  FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <Label x:Name="Password" Content="Mật Khẩu " HorizontalAlignment="Left" Margin="374,259,0,0" VerticalAlignment="Top" Height="40" Width="93" FontSize="14" FontFamily="Arial" Foreground="#495aff"  FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <Label x:Name="Email" Content="Email" HorizontalAlignment="Left" Margin="374,305,0,0" VerticalAlignment="Top" Height="40" Width="72" FontSize="14" FontFamily="Arial" Foreground="#495aff"  FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <Label x:Name="Name" Content="Họ và Tên&#xD;&#xA;" HorizontalAlignment="Left" Margin="374,206,0,0" VerticalAlignment="Top" Height="42" Width="87" FontSize="14" FontFamily="Arial" Foreground="#495aff"  FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <Label Content="Birthday" HorizontalAlignment="Left" Margin="374,354,0,0" VerticalAlignment="Top" Height="39" Width="87" FontSize="14" FontFamily="Arial" Foreground="#495aff"  FontWeight="DemiBold" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtUserid" HorizontalAlignment="Left" Margin="44,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="27" Grid.Column="1"/>
+        <TextBox x:Name="txtPass" HorizontalAlignment="Left" Margin="44,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="28" Grid.Column="1"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="44,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="27" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
 
         </TextBox>
-        <TextBox x:Name="txtName"
-                HorizontalAlignment="Left"
-                Margin="44,212,0,0"
-                TextWrapping="Wrap"
-                VerticalAlignment="Top"
-                Width="186"
-                Height="27"
-                Grid.Column="1"/>
-        <DatePicker x:Name="birthday"
-                HorizontalAlignment="Left"
-                Margin="44,354,0,0"
-                VerticalAlignment="Top"
-                Width="186"
-                Height="36"
-                Grid.Column="1"/>
-        <Button x:Name="btnRegister"
-                Content="Đăng Kí"
-                Margin="425,410,0,0"
-                Click="btnRegister_Click"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Height="36"
-                Width="84"
-                Grid.ColumnSpan="2">
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="44,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="27" Grid.Column="1"/>
+        <DatePicker x:Name="birthday" HorizontalAlignment="Left" Margin="44,354,0,0" VerticalAlignment="Top" Width="186" Height="36" Grid.Column="1"/>
+        <Button x:Name="btnRegister" Content="Đăng Kí" Margin="425,410,0,0" Click="btnRegister_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="84" Grid.ColumnSpan="2">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="20">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
+                    <Border Background="{TemplateBinding Background}" 
+             BorderBrush="{TemplateBinding BorderBrush}" 
+             BorderThickness="{TemplateBinding BorderThickness}" 
+             CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Border>
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                        EndPoint="0,1">
-                    <GradientStop Color="#FF4988F1"
-                            Offset="0.9"/>
-                    <GradientStop Color="#FFC4ECFF"
-                            Offset="0.1"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF4988F1" Offset="0.9" />
+                    <GradientStop Color="#FFC4ECFF" Offset="0.1" />
 
                 </LinearGradientBrush>
             </Button.Background>
@@ -196,39 +62,31 @@
             <Button.FontWeight>DemiBold</Button.FontWeight>
         </Button>
 
-        <Button x:Name="btnBack"
-                Content="Quay Lại"
-                Margin="121,410,0,0"
-                Click="Back_Click"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Height="36"
-                Width="84"
-                Grid.Column="1">
+        <Button x:Name="btnBack" Content="Quay Lại" Margin="121,410,0,0" Click="Back_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="84" Grid.Column="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="20">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
+                    <Border Background="{TemplateBinding Background}" 
+                     BorderBrush="{TemplateBinding BorderBrush}" 
+                     BorderThickness="{TemplateBinding BorderThickness}" 
+                     CornerRadius="20">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     </Border>
                 </ControlTemplate>
             </Button.Template>
             <Button.Background>
-                <LinearGradientBrush StartPoint="0,0"
-                        EndPoint="0,1">
-                    <GradientStop Color="#FF4988F1"
-                            Offset="0.9"/>
-                    <GradientStop Color="#FFC4ECFF"
-                            Offset="0.1"/>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FF4988F1" Offset="0.9" />
+                    <GradientStop Color="#FFC4ECFF" Offset="0.1" />
 
                 </LinearGradientBrush>
             </Button.Background>
             <Button.Foreground>White</Button.Foreground>
             <Button.FontWeight>DemiBold</Button.FontWeight>
         </Button>
+
+
+
+
     </Grid>
 </Window>

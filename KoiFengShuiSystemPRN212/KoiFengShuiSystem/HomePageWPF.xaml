@@ -87,23 +87,18 @@
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Margin="1670,0,0,0"
-                            Click="btn_logout_Click"
-                            Background="#FF3C90A5"/>
+                            Click="btn_logout_Click" Background="#FF3C90A5"/>
                 </Grid>
             </Border>
 
             <!-- Main Buttons -->
             <StackPanel HorizontalAlignment="Center"
-                        Margin="0,200,0,0"
-                    Width="1100"
-                    Height="478">
+                        Margin="0,200,0,0" Width="1100" Height="478">
 
                 <!-- Title -->
 
                 <!-- Feature Cards Container -->
-                <WrapPanel HorizontalAlignment="Center"
-                        Margin="0,0"
-                        Height="488">
+                <WrapPanel HorizontalAlignment="Center" Margin="0,0" Height="488">
                     <!-- Consulting Card -->
                     <Border Width="400"
                             Height="458"
@@ -121,17 +116,17 @@
                                     BorderThickness="4">
                                 <Border.Background>
                                     <ImageBrush ImageSource="img/ying-yang-koi-fish-ai-artwork-554.png"
-                                                Stretch="UniformToFill"/>
+                                              Stretch="UniformToFill"/>
                                 </Border.Background>
                             </Border>
 
                             <TextBlock Text="Tư vấn cá và hồ theo bản mệnh"
-                                       TextAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       FontSize="24"
-                                       FontWeight="SemiBold"
-                                       Foreground="#008080"
-                                       Margin="0,10,0,40"/>
+                                      TextAlignment="Center"
+                                      TextWrapping="Wrap"
+                                      FontSize="24"
+                                      FontWeight="SemiBold"
+                                      Foreground="#008080"
+                                      Margin="0,10,0,40"/>
                             <Button x:Name="btn_consluting"
                                     Content="Tư Vấn"
                                     Style="{StaticResource KoiButton}"
@@ -159,17 +154,17 @@
                                     BorderThickness="4">
                                 <Border.Background>
                                     <ImageBrush ImageSource="img/hinh-nen-ca-koi-de-thuong_090136675.jpg"
-                                                Stretch="UniformToFill"/>
+                                              Stretch="UniformToFill"/>
                                 </Border.Background>
                             </Border>
 
                             <TextBlock Text="Tính độ tương hợp của cá và hồ theo bản mệnh"
-                                       TextAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       FontSize="24"
-                                       FontWeight="SemiBold"
-                                       Foreground="#008080"
-                                       Margin="20,10"/>
+                                      TextAlignment="Center"
+                                      TextWrapping="Wrap"
+                                      FontSize="24"
+                                      FontWeight="SemiBold"
+                                      Foreground="#008080"
+                                      Margin="20,10"/>
                             <Button Content="Tính toán"
                                     Style="{StaticResource KoiButton}"
                                     Width="176"
