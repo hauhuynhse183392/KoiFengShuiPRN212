@@ -16,6 +16,7 @@ namespace FengShuiKoi_Repository
         Task<bool> UpdateShapeImg(string shapeId, string Img);
         Task<List<Shape>> GetShapeByContainsShape(string shape);
       Task<List<Shape>> GetShapesAndPoint();
-
+        Task<bool> AddShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes);
+      Task<bool> UpdateShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes);
     }
 }

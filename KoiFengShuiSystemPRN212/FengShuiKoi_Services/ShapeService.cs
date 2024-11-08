@@ -1,4 +1,5 @@
 ﻿using FengShuiKoi_BO;
+using FengShuiKoi_DAO;
 using FengShuiKoi_Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ namespace FengShuiKoi_Services
         public async Task<bool> UpdateShapeImg(string shapeId, string Img) => await shapeRepo.UpdateShapeImg(shapeId, Img);
         public async Task<List<Shape>> GetShapeByContainsShape(string shape)=> await shapeRepo.GetShapeByContainsShape(shape);
         public async Task<List<Shape>> GetShapesAndPoint()=> await shapeRepo.GetShapesAndPoint();
+        public async Task<bool> UpdateShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes) => await shapeRepo.UpdateShapeAndPoint(_shape, pointOfShapes);
+        public async Task<bool> AddShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes) => await shapeRepo.AddShapeAndPoint(_shape, pointOfShapes);
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FengShuiKoi_BO;
+using FengShuiKoi_DAO;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace FengShuiKoi_Services
         Task<bool> UpdateShapeImg(string shapeId, string Img);
         Task<List<Shape>> GetShapeByContainsShape(string shape);
         Task<List<Shape>> GetShapesAndPoint();
+        Task<bool> UpdateShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes);
+        Task<bool> AddShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes);
 
     }
 }

@@ -151,5 +151,71 @@ namespace FengShuiKoi_DAO
 				throw new Exception($"Lỗi khi cập nhật ảnh Shape: {ex.Message}", ex);
 			}
 		}
-	}
+        public async Task<bool> AddShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes)
+        {
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
+            try
+            {
+               
+                var existingShape = await GetShapeById(_shape.ShapeId);
+                if (existingShape != null)
+                {
+                    return false; 
+                }
+
+               
+                await dbContext.Shapes.AddAsync(_shape);
+                await dbContext.SaveChangesAsync();
+
+                foreach (var point in pointOfShapes)
+                {
+                    if (await dbContext.PointOfShapes.AnyAsync(tc => tc.ShapeId == point.ShapeId && tc.ElementId == point.ElementId))
+                    {
+                        return false; 
+                    }
+                    await dbContext.PointOfShapes.AddAsync(point);
+                }
+
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                Console.WriteLine($"Lỗi khi thêm Hồ và điểm của hồ đó: {ex.Message}");
+                return false;
+            }
+        }
+        public async Task<bool> UpdateShapeAndPoint(Shape _shape, List<PointOfShape> pointOfShapes)
+        {
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var existingShape = await GetShapeById(_shape.ShapeId);
+                if (existingShape == null)
+                {
+                    return false;
+                }
+               
+                existingShape.Image = _shape.Image;
+                dbContext.PointOfShapes.RemoveRange(existingShape.PointOfShapes);
+                foreach (var point  in pointOfShapes)
+                {
+                    point.ShapeId = existingShape.ShapeId; 
+                    await dbContext.PointOfShapes.AddAsync(point);
+                }
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                Console.WriteLine($"Lỗi khi update Hồ và điểm của hồ đó: {ex.Message}");
+                return false;
+            }
+        }
+    }
 }

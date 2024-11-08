@@ -1,8 +1,12 @@
 ﻿using FengShuiKoi_BO;
 using FengShuiKoi_Repository;
 using FengShuiKoi_Services;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace KoiFengShuiSystem
 {
@@ -23,177 +28,171 @@ namespace KoiFengShuiSystem
         private readonly IPointOfShapeService _pointOfShapeService;
         private readonly IShapeService _shapeService;
         private readonly IElementService _elementService;
+        private ObservableCollection<PointOfShape> points;
+        public FengShuiKoi_BO.Shape PointOfShape { get; set; } = null;
         public PointOfShapeWPF()
         {
             InitializeComponent();
             _pointOfShapeService = new PointOfShapeService();
+            points = new ObservableCollection<PointOfShape>();
             _shapeService = new ShapeService();
             _elementService = new ElementService();
-            loadDataInit();
+            ListPoint.ItemsSource = points;
+            
+            
+            
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             loadDataInit();
+            await fillBox(PointOfShape);
+            if (PointOfShape != null)
+            {
+                labelPoint.Content = "Cập nhật Hồ và điểm tương ứng";
+                string imagePath = PointOfShape.Image;
+                if (File.Exists(imagePath))
+                {
+
+                    img.Source = new BitmapImage(new Uri(imagePath, UriKind.Absolute));
+                }
+            }
+            else
+            {
+                labelPoint.Content = "Tạo Hồ và điểm tương ứng";
+            }
         }
         private async void loadDataInit()
         {
             this.cbElement.ItemsSource = await _elementService.GetElement();
-            this.cbShape.ItemsSource = await _shapeService.GetShapes();
             this.cbPoint.ItemsSource = new List<double> { 0.25, 0.5, 0.75, 1 };
             this.cbPoint.DisplayMemberPath = ""; 
             this.cbPoint.SelectedValuePath = "";
             this.cbElement.DisplayMemberPath = "ElementId";
             this.cbElement.SelectedValuePath = "ElementId";
-            this.cbShape.DisplayMemberPath = "ShapeId";
-            this.cbShape.SelectedValuePath = "ShapeId";
-            List<PointOfShape> pointOfShapes = await _pointOfShapeService.GetPointOfShapes();
-            this.dtg_PointOfShape.ItemsSource = pointOfShapes;
             this.cbElement.Text = "";
-            this.cbShape.Text = "";
             this.cbPoint.Text = "";
         }
-    
 
-        
-
-        private void btn_Pond_Click(object sender, RoutedEventArgs e)
+        private async Task fillBox(FengShuiKoi_BO.Shape _shape)
         {
-            PondManageWPF pondManageWPF = new PondManageWPF();
-            pondManageWPF.Show();
-            this.Close();
-        }
-
-        private async void dtg_PointOfShape_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid dataGrid = sender as DataGrid;
-
-
-            DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex) as DataGridRow;
-            if (row != null)
+            if (_shape == null)
             {
-                DataGridCell cellElement = dataGrid.Columns[0].GetCellContent(row).Parent as DataGridCell;
-                string element = ((TextBlock)cellElement.Content).Text;
+                return;
+            }
+            txtShapeId.Text = _shape.ShapeId;
+            txtShapeId.IsEnabled = false;
+            txtImage.Text = _shape.Image;
+            points.Clear();
 
-
-                DataGridCell cellShape = dataGrid.Columns[1].GetCellContent(row).Parent as DataGridCell;
-                string shape = ((TextBlock)cellShape.Content).Text;
-
-                PointOfShape pointOfShape = await _pointOfShapeService.GetPointOfShape(element, shape);
-                if (pointOfShape != null)
+            foreach (var _point in _shape.PointOfShapes)
+            {
+                points.Add(new PointOfShape
                 {
-                    cbElement.SelectedValue = pointOfShape.ElementId;
-                    cbShape.SelectedValue = pointOfShape.ShapeId;
-                    cbPoint.SelectedValue = pointOfShape.Point;
-                }
+                    ElementId = _point.ElementId,
+                    Point = _point.Point,
+                });
             }
         }
 
+
+        private void btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+           
+            this.Close();
+        }
+
+
+        private void btn_SelectImage_Click(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png",
+                Title = "Select an Image File"
+            };
+
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+
+                txtImage.Text = openFileDialog.FileName;
+            }
+        }
         private async void btn_DeletePoint_Click(object sender, RoutedEventArgs e)
         {
-            var pointOfShape = dtg_PointOfShape.SelectedItem as PointOfShape;
-
-            if (pointOfShape != null &&
-      MessageBox.Show("Bạn có muốn xóa dòng dữ liệu này không?",
-                      "Xóa dữ liệu ",
-                      MessageBoxButton.YesNo,
-                      MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (ListPoint.SelectedItem is PointOfShape selectedPoint)
             {
-                if (await _pointOfShapeService.DeletePointOfShape(pointOfShape.ElementId, pointOfShape.ShapeId))
-                {
-                    MessageBox.Show("Xoá dữ liệu thành công");
-                    loadDataInit();
-                }
-                else
-                {
-                    MessageBox.Show("Xoá dữ liệu không thành công");
-                }
+                points.Remove(selectedPoint);
             }
         }
 
         private async void btn_AddPoint_Click(object sender, RoutedEventArgs e)
         {
-            PointOfShape pointOfShape = new PointOfShape();
-            if (string.IsNullOrWhiteSpace(cbPoint.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbElement.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbShape.SelectedValue.ToString()))
+            if (string.IsNullOrWhiteSpace(cbElement.Text.ToString()) || string.IsNullOrWhiteSpace(cbPoint.Text))
             {
-                MessageBox.Show("Tất cả các trường không được bỏ trống !");
+                MessageBox.Show("Xin hãy nhập Mệnh và số điểm tương ứng");
+                return;
             }
-            else
+
+            if (!double.TryParse(cbPoint.Text, out double point))
             {
-                pointOfShape.ElementId = cbElement.SelectedValue.ToString();
-                pointOfShape.ShapeId = cbShape.SelectedValue.ToString();
-                pointOfShape.Point = double.Parse(cbPoint.SelectedValue.ToString());
+                return;
+            }
+            string selectedElementId = cbElement.Text.ToString();
+            if (points.Any(c => c.ElementId == selectedElementId))
+            {
+                MessageBox.Show("Mệnh này đã được thêm vào danh sách. Vui lòng chọn mệnh khác!");
+                return;
+            }
+            points.Add(new PointOfShape { ElementId = cbElement.Text.ToString(), Point = point });
+            cbElement.SelectedItem = null;
+            cbPoint.SelectedItem = null;
+        }
+
+        private async void btn_Save_Click(object sender, RoutedEventArgs e)
+        {
+            var success = false;
+            if (string.IsNullOrWhiteSpace(txtShapeId.Text))
+            {
+                MessageBox.Show("Vui lòng nhập Tên hồ!");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtImage.Text))
+            {
+                MessageBox.Show("Vui lòng nhập đường dẫn hình ảnh");
+                return;
+            }
+            
+            var shape = new FengShuiKoi_BO.Shape
+            {
+                ShapeId = txtShapeId.Text,
+                Image = txtImage.Text,
                
-                var _existPoint = await _pointOfShapeService.GetPointOfShape(pointOfShape.ElementId, pointOfShape.ShapeId);
-                if (_existPoint != null)
-                {
+            };
 
-                    MessageBox.Show("Số điểm của hồ và mệnh này đã tồn tại trong hệ thống");
-                    return;
-                }
-                else
-                {
-                    if (await _pointOfShapeService.AddPointOfShape(pointOfShape))
-                    {
-                        MessageBox.Show("Thêm điểm của hồ và mệnh thành công");
-                        loadDataInit();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Thêm điểm của hồ và mệnh thất bại");
-
-                    }
-                }
-
-
-            }
-        }
-
-        private async void btn_UpdatePoint_Click(object sender, RoutedEventArgs e)
-        {
-            PointOfShape pointOfShape = new PointOfShape();
-            if (string.IsNullOrWhiteSpace(cbPoint.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbElement.SelectedValue.ToString()) || string.IsNullOrWhiteSpace(cbShape.SelectedValue.ToString()))
+            var pointOfShape = points.Select(c => new PointOfShape
             {
-                MessageBox.Show("Tất cả các trường không được bỏ trống !");
+                ElementId = c.ElementId,
+                ShapeId = shape.ShapeId,
+                Point = c.Point 
+            }).ToList();
+            if (PointOfShape == null)
+            {
+                success = await _shapeService.AddShapeAndPoint(shape, pointOfShape);
             }
             else
             {
-                pointOfShape.ElementId = cbElement.SelectedValue.ToString();
-                pointOfShape.ShapeId = cbShape.SelectedValue.ToString();
-                pointOfShape.Point = double.Parse(cbPoint.SelectedValue.ToString());
-                
-                var _existPoint = await _pointOfShapeService.GetPointOfShape(pointOfShape.ElementId, pointOfShape.ShapeId);
-                if (_existPoint == null)
-                {
-
-                    MessageBox.Show("Số điểm của hồ và mệnh này chưa tồn tại trong hệ thống");
-                    return;
-                }
-                else
-                {
-                    if (await _pointOfShapeService.UpdatePointOfShape(pointOfShape))
-                    {
-                        MessageBox.Show("Cập nhật điểm thành công");
-                        loadDataInit();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Cập nhật điểm thất bại");
-
-                    }
-                }
-
-
+                success = await _shapeService.UpdateShapeAndPoint(shape, pointOfShape);
             }
-        }
-
-        private async void btn_Search_Click(object sender, RoutedEventArgs e)
-        {
-            this.dtg_PointOfShape.ItemsSource = await _pointOfShapeService.SearchPointOfShapes(cbElement.SelectedValue?.ToString(), cbShape.SelectedValue?.ToString(), cbPoint.SelectedValue != null ? (double?)double.Parse(cbPoint.SelectedValue.ToString()) : null);
-        }
-
-        private void btn_Reset_Click(object sender, RoutedEventArgs e)
-        {
-            loadDataInit();
+            if (success)
+            {
+                MessageBox.Show(PointOfShape == null ? "Thêm Hồ thành công!" : "Cập nhật Hồ thành công");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(PointOfShape == null ? "Thêm cá Koi thất bại." : "Cập nhật cá Koi thất bại");
+            }
         }
     }
 }

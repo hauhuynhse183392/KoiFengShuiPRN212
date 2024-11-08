@@ -5,84 +5,86 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="Pond Management" Height="1000" Width="1700"
+        Title="Pond Management" Height="750" Width="1500"
         WindowStartupLocation="CenterScreen">
     <Grid Background="#F0F8FF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>
+            <!-- Nội dung -->
+        </Grid.ColumnDefinitions>
+        <local:Sidebar Grid.Column="0"/>
+        <Grid Grid.Column="1" Margin="10">
+            <Label Content="Quản lý Hồ và Điểm " Margin="0,20,0,20" FontSize="36" HorizontalAlignment="Center"   FontWeight="Bold" Background="{x:Null}">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF6AE6E3" Offset="1"/>
+                        <GradientStop Color="#FF6FDC75" Offset="0.007"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
 
-        <Label Content="Pond Management" Margin="0,20,0,20" FontSize="36" HorizontalAlignment="Center"   FontWeight="Bold" Background="{x:Null}">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF6AE6E3" Offset="1"/>
-                    <GradientStop Color="#FF6FDC75" Offset="0.007"/>
-                </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
+            <DataGrid x:Name="dtgPond" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Height="396" Margin="0,186,0,0" Width="1176" SelectionChanged="dtgPond_SelectionChanged">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tên Hồ" Binding="{Binding ShapeId}" Width="350" FontSize="16">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-        <DataGrid x:Name="dtgPond" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Top" Height="530" Margin="0,138,0,0" Width="1176" SelectionChanged="dtgPond_SelectionChanged">
-            <DataGrid.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="FontSize" Value="20"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Shape" Binding="{Binding ShapeId}" Width="350" FontSize="16">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Hình Ảnh" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}" Width="510" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Image Of Shape" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Image}" Width="510" Height="120" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Điểm Mệnh Tương Ứng" Width="350">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
 
-                <DataGridTemplateColumn Header="Shape and Points" Width="350">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding PointOfShapes}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding ElementId}" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
+                                                <TextBlock Text="{Binding Point}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
 
-                            <ItemsControl ItemsSource="{Binding PointOfShapes}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding ElementId}" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
-                                            <TextBlock Text="{Binding Point}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Light"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
 
 
 
-        <TextBox x:Name="txtShapeId" Text="Enter Shape ID" Padding="5" Margin="518,765,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="383" Height="40"/>
-        <TextBox x:Name="txtImage" Margin="518,835,0,0" Text="Enter Image Path" Padding="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="383" Height="40"/>
-
-        <Button x:Name="btn_SelectImage" Content="Select Image" Margin="0,835,597,0" Width="150" Height="40" Click="btn_SelectImage_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-        <Button x:Name="btn_Search" Content="Search" Margin="0,765,597,0" Width="150" Height="40" Click="btn_Search_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtShapeId" Text="Tên hồ cần tìm" Padding="5" Margin="339,98,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="341" Height="40"/>
+            <Button x:Name="btn_Search" Content="Tìm Kiếm" Margin="0,98,398,0" Width="150" Height="40" Click="btn_Search_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,880,0,0" Height="84" Width="1100">
-            <Button x:Name="btn_AddPond" Content="Add Pond" Margin="10" Width="200" Height="40" Click="btn_AddPond_Click"/>
-            <Button x:Name="btn_UpdatePond" Content="Update Pond" Margin="10" Width="200" Height="40" Click="btn_UpdatePond_Click"/>
-            <Button x:Name="btn_DeletePond" Content="Delete Pond" Margin="10" Width="200" Height="40" Click="btn_DeletePond_Click"/>
-
-            <Button x:Name="btn_PointOfShape" Content="Manage Point Of Shape" Margin="10" Width="200" Height="40" Click="btn_PointOfShape_Click"/>
-            <Button x:Name="btn_Admin" Content="Back Admin Page" Margin="10" Width="200" Height="40" Click="btn_Admin_Click"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,626,0,0" Height="84" Width="660">
+                <Button x:Name="btn_DeletePond" Content="Xóa Hồ và Điểm" Margin="10" Width="200" Height="40" Click="btn_DeletePond_Click"/>
+                <Button x:Name="btn_Add" Content="Thêm Hồ và Điểm" Margin="10" Width="200" Height="40" Click="btnAdd_Click"/>
+                <Button x:Name="btn_PointOfShape" Content="Cập nhật Hồ và Điểm" Margin="10" Width="200" Height="40" Click="btn_PointOfShape_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
