@@ -25,12 +25,11 @@ namespace KoiFengShuiSystem
         private IAccountService accountService;
         private IMemberService memberService;
         public UserManageWPF()
-        {
+		{
             InitializeComponent();
             accountService = new AccountService();
             memberService = new MemberService();
         }
-
         private async void DataGrid_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dataGrid = sender as DataGrid;
@@ -293,5 +292,6 @@ namespace KoiFengShuiSystem
 
             this.DataGrid.ItemsSource = filteredList;
         }
+
     }
 }

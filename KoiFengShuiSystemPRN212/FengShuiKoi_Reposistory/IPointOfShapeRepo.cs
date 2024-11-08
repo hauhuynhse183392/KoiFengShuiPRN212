@@ -14,5 +14,6 @@ namespace FengShuiKoi_Repository
         Task<List<PointOfShape>> GetGoodShapeByElemnet(string element);
         Task<PointOfShape> GetPointOfShapeByShapeID(string shape);
         Task<bool> DeletePointOfShapeByShapeID(string shapeID);
+        Task<List<PointOfShape>> SearchPointOfShapes(string? Element, string? shapeID, double? point);
     }
 }

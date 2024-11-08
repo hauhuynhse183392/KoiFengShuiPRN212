@@ -346,5 +346,6 @@ namespace KoiFengShuiSystem
 
             txtElementResult.Text = $"Mệnh của bạn là: {element}, Cung mệnh của bạn là: {Life_Palace}";
         }
+
     }
 }

@@ -13,13 +13,13 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Background="#2C3E50" VerticalAlignment="Stretch">
-            <Image Source="/hinh-anh-ho-ca-koi-dep_111108115.jpg" Width="116" Height="93" Margin="10"/>
-            <TextBlock Text="Admin Page" Foreground="White" FontSize="20" Margin="10" TextAlignment="Center"/>
+            <Image Source="Resources/login.jpg" Width="116" Height="93" Margin="10"/>
+            <TextBlock Text="Admin" Foreground="White" FontSize="20" Margin="10" TextAlignment="Center"/>
             <Separator Margin="10"/>
-            <Button x:Name="btn_ManageUser" Content="Manage Users"  Background="Transparent" Foreground="White" Click="btn_ManageUser_Click" Margin="10"/>
-            <Button x:Name="btn_ManageKoi" Content="Manage Koi"  Background="Transparent" Foreground="White" Click="btn_ManageKoi_Click" Margin="10"/>
-            <Button x:Name="btn_ManagePond" Content="Manage Pond"  Background="Transparent" Foreground="White"  Click="btn_ManagePond_Click" Margin="10"/>
-            <Button x:Name="btn_logout" Content="Log Out"  Background="Transparent" Foreground="White" Click="btn_logout_Click"  Margin="10"/>
+            <Button x:Name="btn_ManageUser" Content="Quản Lý Người Dùng"  Background="Transparent" Foreground="White" Click="btn_ManageUser_Click" Margin="10"/>
+            <Button x:Name="btn_ManageKoi" Content="Quản Lý Cá Koi"  Background="Transparent" Foreground="White" Click="btn_ManageKoi_Click" Margin="10"/>
+            <Button x:Name="btn_ManagePond" Content="Quản Lý Hồ và Điểm"  Background="Transparent" Foreground="White"  Click="btn_ManagePond_Click" Margin="10"/>
+            <Button x:Name="btn_logout" Content="Đăng Xuất"  Background="Transparent" Foreground="White" Click="btn_logout_Click"  Margin="10"/>
         </StackPanel>
     </Grid>
 </UserControl>

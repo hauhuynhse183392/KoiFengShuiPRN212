@@ -26,5 +26,6 @@ namespace FengShuiKoi_Services
         public async Task<PointOfShape> GetPointOfShapeByShapeID(string shape) => await pointOfShapeRepo.GetPointOfShapeByShapeID(shape);
         public async Task<bool> DeletePointOfShapeByShapeID(string shapeID) => await pointOfShapeRepo.DeletePointOfShapeByShapeID(shapeID);
         public async Task<List<PointOfShape>> GetGoodShapeByElemnet(string element) => await pointOfShapeRepo.GetGoodShapeByElemnet(element);
+        public async Task<List<PointOfShape>> SearchPointOfShapes(string? Element, string? shapeID, double? point) => await pointOfShapeRepo.SearchPointOfShapes(Element, shapeID, point);
     }
 }

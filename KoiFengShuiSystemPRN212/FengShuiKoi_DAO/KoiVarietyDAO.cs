@@ -69,7 +69,6 @@ namespace FengShuiKoi_DAO
 
             return await query.ToListAsync();
         }
-
         public async Task<bool> AddKoiVariety(KoiVariety variety)
         {
             bool isSuccess = false;

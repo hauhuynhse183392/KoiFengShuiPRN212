@@ -2,6 +2,7 @@
 using FengShuiKoi_DAO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FengShuiKoi_Repository
 {
@@ -18,5 +19,6 @@ namespace FengShuiKoi_Repository
         public async Task<bool> UpdatePointOfShape(PointOfShape pointOfShape) => await PointOfShapeDAO.Instance.UpdatePointOfShape(pointOfShape);
         public async Task<PointOfShape> GetPointOfShapeByShapeID(string shape) => await PointOfShapeDAO.Instance.GetPointOfShapeByShapeID(shape);
         public async Task<List<PointOfShape>> GetGoodShapeByElemnet(string element) => await PointOfShapeDAO.Instance.GetGoodShapeByElemnet(element);
+        public async Task<List<PointOfShape>> SearchPointOfShapes(string? Element, string? shapeID, double? point) => await PointOfShapeDAO.Instance.SearchPointOfShapes(Element, shapeID, point);
     }
 }
