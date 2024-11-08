@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Background="#2C3E50" VerticalAlignment="Stretch">
-            <Image Source="Resources/login.jpg" Width="116" Height="93" Margin="10"/>
+            <Image Source="Img/sidebar.jpg" Width="116" Height="93" Margin="10"/>
             <TextBlock Text="Admin" Foreground="White" FontSize="20" Margin="10" TextAlignment="Center"/>
             <Separator Margin="10"/>
             <Button x:Name="btn_ManageUser" Content="Quản Lý Người Dùng"  Background="Transparent" Foreground="White" Click="btn_ManageUser_Click" Margin="10"/>

@@ -69,70 +69,107 @@ namespace FengShuiKoi_DAO
 
             return await query.ToListAsync();
         }
-        public async Task<bool> AddKoiVariety(KoiVariety variety)
+        public async Task<bool> AddKoiVariety(KoiVariety variety, List<TypeColor> colors)
         {
-            bool isSuccess = false;
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
             try
             {
-                var koiVariety = await GetKoiVarietyByType(variety.KoiType);
-                if (koiVariety == null)
+                // Kiểm tra nếu KoiVariety đã tồn tại
+                var existingKoi = await GetKoiVarietyByType(variety.KoiType);
+                if (existingKoi != null)
                 {
-                    await dbContext.KoiVarieties.AddAsync(variety);
-                    await dbContext.SaveChangesAsync();
-                    isSuccess = true;
+                    return false; // KoiVariety đã tồn tại
                 }
+
+                // Thêm KoiVariety
+                await dbContext.KoiVarieties.AddAsync(variety);
+                await dbContext.SaveChangesAsync();
+
+                // Thêm TypeColors
+                foreach (var color in colors)
+                {
+                    if (await dbContext.TypeColors.AnyAsync(tc => tc.KoiType == color.KoiType && tc.ColorId == color.ColorId))
+                    {
+                        return false; // Tìm thấy màu trùng lặp
+                    }
+                    await dbContext.TypeColors.AddAsync(color);
+                }
+
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                await transaction.RollbackAsync();
+                Console.WriteLine($"Lỗi khi thêm KoiVariety và TypeColors: {ex.Message}");
+                return false;
             }
-            return isSuccess;
         }
 
         public async Task<bool> DeleteKoiVariety(string type)
         {
-            bool isSuccess = false;
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
             try
             {
-                var koiVariety = await GetKoiVarietyByType(type);
-                if (koiVariety != null)
-                {
-                    dbContext.KoiVarieties.Remove(koiVariety);
-                    await dbContext.SaveChangesAsync();
-                    isSuccess = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return isSuccess;
-        }
-
-        public async Task<bool> UpdateKoiVariety(KoiVariety updatedKoi)
-        {
-            try
-            {
-                var existingKoi = await dbContext.KoiVarieties.FirstOrDefaultAsync(k => k.KoiType == updatedKoi.KoiType);
+                var existingKoi = await GetKoiVarietyByType(type);
                 if (existingKoi == null)
                 {
                     return false;
                 }
-
-                existingKoi.Image = updatedKoi.Image;
-                existingKoi.Description = updatedKoi.Description;
-                existingKoi.Element = updatedKoi.Element;
-
-                dbContext.Entry(existingKoi).State = EntityState.Modified;
-                int affectedRows = await dbContext.SaveChangesAsync();
-
-                return affectedRows > 0;
+                dbContext.TypeColors.RemoveRange(existingKoi.TypeColors);
+                dbContext.KoiVarieties.Remove(existingKoi);
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi khi cập nhật KoiVariety: {ex.Message}");
+                await transaction.RollbackAsync();
+                Console.WriteLine($"Lỗi khi xóa KoiVariety và TypeColors: {ex.Message}");
                 return false;
             }
+        }
+
+        public async Task<bool> UpdateKoiVariety(KoiVariety updatedKoi, List<TypeColor> colors)
+        {
+            using var transaction = await dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var existingKoi = await GetKoiVarietyByType(updatedKoi.KoiType);
+                if (existingKoi == null)
+                {
+                    return false;
+                }
+                existingKoi.Description = updatedKoi.Description;
+                existingKoi.Element = updatedKoi.Element;
+                existingKoi.Image = updatedKoi.Image;
+                dbContext.TypeColors.RemoveRange(existingKoi.TypeColors);
+                foreach (var color in colors)
+                {
+                    color.KoiType = existingKoi.KoiType;
+                    await dbContext.TypeColors.AddAsync(color);
+                }
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                Console.WriteLine($"Lỗi khi update KoiVariety và TypeColors: {ex.Message}");
+                return false;
+            }
+        }
+
+        public async Task<List<KoiVariety>> GetKoiVarietiesByKoiType(string koiType)
+        {
+            if (string.IsNullOrWhiteSpace(koiType))
+            {
+                return await instance.GetKoiVarieties();
+            }
+            return await dbContext.KoiVarieties.Include(k => k.TypeColors).Where(m => m.KoiType.Contains(koiType)).ToListAsync();
         }
     }
 }

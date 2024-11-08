@@ -11,15 +11,18 @@
   <ItemGroup>
     <None Remove="Img\1348333.png" />
     <None Remove="Img\3731.png_1200.png" />
+    <None Remove="Img\anh-nen-ca-koi-hd_090133266.jpg" />
     <None Remove="Img\hinh-nen-ca-koi-de-thuong_090136675.jpg" />
     <None Remove="Img\koi-fish-1920-x-1080-background-p4ejdybjvmurg1ok.jpg" />
     <None Remove="Img\login.jpg" />
     <None Remove="Img\logo-ca-Koi-12.png" />
     <None Remove="Img\menu.jpg" />
+    <None Remove="Img\sidebar.jpg" />
     <None Remove="Img\ying-yang-koi-fish-ai-artwork-554.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Img\anh-nen-ca-koi-hd_090133266.jpg" />
     <Resource Include="Img\hinh-nen-ca-koi-de-thuong_090136675.jpg" />
   </ItemGroup>
 
@@ -31,6 +34,7 @@
     <Resource Include="Img\1348333.png" />
     <Resource Include="Img\login.jpg" />
     <Resource Include="Img\menu.jpg" />
+    <Resource Include="Img\sidebar.jpg" />
     <Resource Include="Img\ying-yang-koi-fish-ai-artwork-554.png" />
   </ItemGroup>
 

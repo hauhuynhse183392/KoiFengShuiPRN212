@@ -7,7 +7,7 @@
 
     <Grid Margin="10">
         <Grid.Background>
-            <ImageBrush ImageSource="/anh-nen-ca-koi-hd_090133266.jpg"/>
+            <ImageBrush ImageSource="Img/anh-nen-ca-koi-hd_090133266.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

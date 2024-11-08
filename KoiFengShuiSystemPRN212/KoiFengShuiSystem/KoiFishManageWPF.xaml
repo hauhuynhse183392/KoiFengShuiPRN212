@@ -5,9 +5,114 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="KoiFishManageWPF" Height="1000" Width="1850"
+        Title="KoiFishManageWPF" Height="800" Width="1500" Loaded="Window_Loaded"
         WindowStartupLocation = "CenterScreen">
-    <Grid>
-        
+    <Grid Margin="0,0,0,-6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:Sidebar Grid.Column="0"/>
+        <Grid Grid.Column="1">
+            <Label Content="Quản lý cá Koi" HorizontalAlignment="Center" Margin="0,51,0,0" VerticalAlignment="Top" FontSize="36">
+                <Label.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#F6B3C0" Offset="0.0" />
+                        <GradientStop Color="#F9EBAE" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Label.Background>
+            </Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,156,0,0">
+                <Button x:Name="btnAdd" Content="Thêm cá Koi" Height="75" Width="120" Margin="0,0,30,0" Click="btnAdd_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#FF6F20" Offset="0.0" />
+                            <GradientStop Color="#E63946" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Foreground>
+                        <SolidColorBrush Color="#FFFFFF" />
+                    </Button.Foreground>
+                </Button>
+                <Button x:Name="btnUpdate" Content="Cập nhật cá Koi" Height="75" Width="120" Margin="0,0,30,0" Click="btnUpdate_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#8D6E63" Offset="0.0" />
+                            <!-- Nâu -->
+                            <GradientStop Color="#D5DBDB" Offset="1.0" />
+                            <!-- Xám nhạt -->
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Foreground>
+                        <SolidColorBrush Color="#FFFFFF" />
+                    </Button.Foreground>
+                </Button>
+                <Button x:Name="btnDelete" Content="Xóa cá Koi" Height="75" Width="120" Margin="0,0,30,0" Click="btnDelete_Click">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#FF5733" Offset="0.0" />
+                            <!-- Đỏ cam -->
+                            <GradientStop Color="#FFC300" Offset="1.0" />
+                            <!-- Vàng -->
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Button.Foreground>
+                        <SolidColorBrush Color="#FFFFFF" />
+                    </Button.Foreground>
+                </Button>
+            </StackPanel>
+            <DataGrid x:Name="KoiManageGrid" d:ItemsSource="{d:SampleData ItemCount=5}" AutoGenerateColumns="False" RenderTransformOrigin="0.5,0.5" Margin="124,360,131,63">
+                <DataGrid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.134"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </DataGrid.RenderTransform>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Loại Koi" Width="100" Binding="{Binding KoiType}" />
+                    <DataGridTemplateColumn Header="Hình ảnh">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}" Width="100" Height="100" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Mệnh" Width="100" Binding="{Binding Element}" />
+                    <DataGridTextColumn Header="Mô tả" Binding="{Binding Description}" Width="*" />
+                    <DataGridTemplateColumn Header="Màu sắc">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding TypeColors}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding ColorId}" Margin="0,0,5,0"/>
+                                                <TextBlock Text="{Binding Percentage, StringFormat={}{0:P0}}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Content="Tìm kiếm cá theo giống" HorizontalAlignment="Left" Margin="130,272,0,0" VerticalAlignment="Top" Height="56" Width="221" FontSize="20" Foreground="#6A0572"/>
+            <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="418,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" Height="56"/>
+            <Button x:Name="btnSearch" Content="Tìm kiếm" HorizontalAlignment="Left" Height="55" Margin="982,273,0,0" VerticalAlignment="Top" Width="105" Click="btnSearch_Click">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#4A90E2" Offset="0.0" />
+                        <GradientStop Color="#50E3C2" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Foreground>
+                    <SolidColorBrush Color="#FFFFFF" />
+                </Button.Foreground>
+            </Button>
+        </Grid>
     </Grid>
 </Window>
