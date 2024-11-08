@@ -78,7 +78,7 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <ImageBrush ImageSource="/Calculate.jpg"/>
+        <ImageBrush ImageSource="/1348333.png"/>
     </Window.Background>
 
     <Grid>
@@ -88,16 +88,16 @@
                 <TextBlock Text="Calculate Compatibility"
                            FontSize="28"
                            FontWeight="Bold"
-                           Foreground="#f0964b"
+                           Foreground="White"
                            HorizontalAlignment="Center"
-                           Margin="0,0,0,30"/>
+                           Margin="0,0,0,30" Background="#FF5F59A7"/>
 
                 <!-- User Information -->
-                <GroupBox Header="Thông Tin Người Dùng" BorderBrush="#f0964b" BorderThickness="1"
-                        Style="{StaticResource GroupBoxStyle}">
+                <GroupBox Header="Thông Tin Người Dùng" BorderBrush="#FF5F59A7" BorderThickness="1"
+                        Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="#f0964b" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding}" Foreground="#FCFFFFFF" FontWeight="Bold" Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <Grid Margin="10">
@@ -135,6 +135,7 @@
                             <Button x:Name="btnCalculateElement"
                                     Content="Tính toán mệnh"
                                     Margin="0,0,0,10"
+                                    Style="{StaticResource ButtonStyle}"
                                     Click="CalculateElement_Click"/>
                             <TextBlock x:Name="txtElementResult"
                                        TextWrapping="Wrap"
@@ -146,10 +147,10 @@
                 </GroupBox>
 
                 <!-- Fish Selection -->
-                <GroupBox Header="Chọn Loại Cá" BorderBrush="#f0964b" BorderThickness="1" Style="{StaticResource GroupBoxStyle}">
+                <GroupBox Header="Chọn Loại Cá" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="#f0964b" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <Grid Margin="10">
@@ -275,10 +276,10 @@
                 </GroupBox>
 
                 <!-- Pond Shape -->
-                <GroupBox Header="Hình Dáng Hồ" BorderBrush="#f0964b" BorderThickness="1" Style="{StaticResource GroupBoxStyle}">
+                <GroupBox Header="Hình Dáng Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="#f0964b" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <ItemsControl x:Name="PondShapeList">
@@ -340,10 +341,10 @@
                 </GroupBox>
 
                 <!-- Pond Direction -->
-                <GroupBox Header="Hướng Đặt Hồ" BorderBrush="#f0964b" BorderThickness="1" Style="{StaticResource GroupBoxStyle}">
+                <GroupBox Header="Hướng Đặt Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="#f0964b" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
                     <StackPanel Margin="10">
@@ -367,8 +368,14 @@
                 <!-- Results Section -->
                 <GroupBox Header="Kết Quả Phân Tích"
                           x:Name="ResultsSection"
-                          Style="{StaticResource GroupBoxStyle}"
+                          BorderBrush="#FF5F59A7" BorderThickness="1"
+                          Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF"
                           Visibility="Collapsed">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
                     <StackPanel Margin="10">
                         <TextBlock x:Name="CompatibilityScore"
                                    FontSize="20"
