@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="hinh-nen-ca-koi-de-thuong_090136675.jpg" />
     <None Remove="Img\1348333.png" />
     <None Remove="Img\3731.png_1200.png" />
     <None Remove="Img\hinh-nen-ca-koi-de-thuong_090136675.jpg" />
