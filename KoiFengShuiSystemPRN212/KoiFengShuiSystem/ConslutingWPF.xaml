@@ -5,9 +5,126 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="ConslutingWPF" Height="1000" Width="1850"
-        WindowStartupLocation = "CenterScreen">
+        Title="ConslutingWPF" Height="800" Width="1600"
+        WindowStartupLocation="CenterScreen" RenderTransformOrigin="0.5,0.5"
+        >
+
+    <Window.Background>
+        <ImageBrush Opacity="0.9" TileMode="FlipY" ImageSource="Img/koi20.jpg"/>
+    </Window.Background>
+    <Window.Resources>
+        <!-- Global style for all Labels -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    <Window.Foreground>
+        <ImageBrush ImageSource="Img/koi20.jpg"/>
+    </Window.Foreground>
+
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="707*"/>
+            <ColumnDefinition Width="93*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Label Content="Tư vấn Cung mệnh và Sinh mệnh" HorizontalAlignment="Left" Margin="533,50,0,0" VerticalAlignment="Top" FontSize="36" Background="#FF15B189"/>
+
+        <Label Content="Ngày sinh:" HorizontalAlignment="Left" Margin="107,140,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
+        <DatePicker x:Name="birthDatePicker" HorizontalAlignment="Left" Margin="248,149,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Background="#FF15B189" />
+
+        <Label Content="Giới tính:" HorizontalAlignment="Left" Margin="107,217,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
+        <ComboBox x:Name="genderComboBox" HorizontalAlignment="Left" Margin="248,221,0,0" VerticalAlignment="Top" Width="200" FontSize="20">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FF0D81F4" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+            <ComboBoxItem Content="Nam"/>
+            <ComboBoxItem Content="Nữ"/>
+        </ComboBox>
+
+        <Button x:Name="calculateButton" Content="Tính toán" HorizontalAlignment="Left" Margin="184,320,0,0" VerticalAlignment="Top" Width="200" Height="50" FontSize="20" Click="calculateButton_Click" BorderBrush="#FF707070" RenderTransformOrigin="0.5,0.5" Background="#FF15B189" Foreground="White"/>
+
+        <Label Content="Thông tin người dùng" HorizontalAlignment="Left" Margin="113,431,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
+        <TextBlock x:Name="resultTextBlock" HorizontalAlignment="Left" Margin="113,485,0,0" VerticalAlignment="Top" FontSize="20" Width="400" TextWrapping="Wrap" Foreground="White" Height="264">
+            <TextBlock.Background>
+                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
+            </TextBlock.Background>
+        </TextBlock>
+
+        <Label Content="Hướng phù hợp:" HorizontalAlignment="Left" Margin="1127,478,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
+        <TextBlock x:Name="suitableDirectionsTextBlock" HorizontalAlignment="Left" Margin="1176,535,0,0" VerticalAlignment="Top" FontSize="20" Width="330" TextWrapping="Wrap" Foreground="#FFF6F6F6" Height="52" Grid.ColumnSpan="2">
+            <TextBlock.Background>
+                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
+            </TextBlock.Background>
+        </TextBlock>
+
+        <Label Content="Cá phù hợp:" HorizontalAlignment="Left" Margin="575,140,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
+        <DataGrid x:Name="koiDataGrid" HorizontalAlignment="Left" Margin="748,149,0,0" VerticalAlignment="Top" Width="758" Height="300" AutoGenerateColumns="False" Grid.ColumnSpan="2" Foreground="#FF0B0B0B">
+            <DataGrid.Background>
+                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
+            </DataGrid.Background>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên cá" Binding="{Binding KoiType}" Width="200"/>
+
+                <DataGridTemplateColumn Header="Hình ảnh" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Image}" Width="60" Height="100"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Mô tả" Width="400">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description}" 
+                                       TextWrapping="Wrap"
+                                       MaxHeight="100"
+                                       ToolTip="{Binding Description}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="MaxHeight" Value="Infinity"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Hồ phù hợp:" HorizontalAlignment="Left" Margin="575,470,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
+        <DataGrid x:Name="pondDataGrid" HorizontalAlignment="Left" Margin="748,479,0,0" VerticalAlignment="Top" Width="350" Height="270" AutoGenerateColumns="False" Foreground="Black">
+            <DataGrid.Background>
+                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
+            </DataGrid.Background>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hình dạng" Binding="{Binding ShapeId}" Width="100"/>
+
+                <DataGridTemplateColumn Header="Hình ảnh" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Image}" Width="auto" Height="auto"/>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Số lượng cá&#xA;" HorizontalAlignment="Left" Margin="1127,608,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189" Height="34"/>
+        <TextBlock x:Name="suitableQuantityTextBlock" HorizontalAlignment="Left" Margin="1176,660,0,0" VerticalAlignment="Top" FontSize="20" Width="330" TextWrapping="Wrap" Foreground="White" Height="89" Grid.ColumnSpan="2">
+            <TextBlock.Background>
+                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
+            </TextBlock.Background>
+        </TextBlock>
     </Grid>
 </Window>

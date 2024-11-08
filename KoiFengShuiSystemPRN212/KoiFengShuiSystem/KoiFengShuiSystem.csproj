@@ -14,6 +14,7 @@
     <None Remove="Img\anh-nen-ca-koi-hd_090133266.jpg" />
     <None Remove="Img\hinh-nen-ca-koi-de-thuong_090136675.jpg" />
     <None Remove="Img\koi-fish-1920-x-1080-background-p4ejdybjvmurg1ok.jpg" />
+    <None Remove="Img\koi20.jpg" />
     <None Remove="Img\login.jpg" />
     <None Remove="Img\logo-ca-Koi-12.png" />
     <None Remove="Img\menu.jpg" />
@@ -32,6 +33,7 @@
 
   <ItemGroup>
     <Resource Include="Img\1348333.png" />
+    <Resource Include="Img\koi20.jpg" />
     <Resource Include="Img\login.jpg" />
     <Resource Include="Img\menu.jpg" />
     <Resource Include="Img\sidebar.jpg" />
