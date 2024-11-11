@@ -21,6 +21,8 @@
     <None Remove="Img\login.jpg" />
     <None Remove="Img\logo-ca-Koi-12.png" />
     <None Remove="Img\menu.jpg" />
+    <None Remove="Img\pointManagement.png" />
+    <None Remove="Img\pondmanagement.png" />
     <None Remove="Img\sidebar.jpg" />
     <None Remove="Img\ying-yang-koi-fish-ai-artwork-554.png" />
   </ItemGroup>
@@ -42,6 +44,10 @@
     <Resource Include="Img\koiManage1.jpg" />
     <Resource Include="Img\login.jpg" />
     <Resource Include="Img\menu.jpg" />
+    <Resource Include="Img\pointManagement.png" />
+    <Resource Include="Img\pondmanagement.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Img\sidebar.jpg" />
     <Resource Include="Img\ying-yang-koi-fish-ai-artwork-554.png" />
   </ItemGroup>

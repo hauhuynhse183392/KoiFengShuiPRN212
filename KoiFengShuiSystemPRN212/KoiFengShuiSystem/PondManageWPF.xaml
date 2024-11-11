@@ -7,7 +7,52 @@
         mc:Ignorable="d"
         Title="Pond Management" Height="750" Width="1500"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="#F0F8FF">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF88EAA4" Offset="0"/>
+                        <GradientStop Color="#FF92D4D0" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#FFA81DEC"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#385D8A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="#4682B4"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="Img/pondmanagement.png"/>
+        </Grid.Background>
+  
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <!-- Sidebar -->
@@ -16,12 +61,12 @@
         </Grid.ColumnDefinitions>
         <local:Sidebar Grid.Column="0"/>
         <Grid Grid.Column="1" Margin="10">
-            <Label Content="Quản lý Hồ và Điểm " Margin="0,20,0,20" FontSize="36" HorizontalAlignment="Center"   FontWeight="Bold" Background="{x:Null}">
+            <Label Content="Quản lý hồ và điểm&#xD;&#xA; " Margin="0,20,0,20" FontSize="48" HorizontalAlignment="Center" Background="{x:Null}" FontFamily="Dancing Script" FontStyle="Italic">
                 <Label.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
-                        <GradientStop Color="#FF6AE6E3" Offset="1"/>
-                        <GradientStop Color="#FF6FDC75" Offset="0.007"/>
+                        <GradientStop Color="#FF0FEDE8" Offset="1"/>
+                        <GradientStop Color="#FF84FF8B" Offset="0.007"/>
                     </LinearGradientBrush>
                 </Label.Foreground>
             </Label>
@@ -31,8 +76,9 @@
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="FontSize" Value="20"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="FontWeight" Value="Medium"/>
+                        <Setter Property="FontFamily" Value="Dancing Script"/>
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
@@ -77,13 +123,13 @@
 
 
             <TextBox x:Name="txtShapeId" Text="Tên hồ cần tìm" Padding="5" Margin="339,98,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="341" Height="40"/>
-            <Button x:Name="btn_Search" Content="Tìm Kiếm" Margin="0,98,398,0" Width="150" Height="40" Click="btn_Search_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <Button x:Name="btn_Search" Content="Tìm Kiếm" Margin="0,98,398,0" Width="150" Height="40" Click="btn_Search_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ButtonStyle}"/>
 
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,626,0,0" Height="84" Width="660">
-                <Button x:Name="btn_DeletePond" Content="Xóa Hồ và Điểm" Margin="10" Width="200" Height="40" Click="btn_DeletePond_Click"/>
-                <Button x:Name="btn_Add" Content="Thêm Hồ và Điểm" Margin="10" Width="200" Height="40" Click="btnAdd_Click"/>
-                <Button x:Name="btn_PointOfShape" Content="Cập nhật Hồ và Điểm" Margin="10" Width="200" Height="40" Click="btn_PointOfShape_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,626,0,0" Height="84" Width="597">
+                <Button x:Name="btn_DeletePond" Content="Xóa hồ và điểm" Margin="10" Width="180" Height="40" Click="btn_DeletePond_Click" Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="btn_Add" Content="Thêm hồ và điểm" Margin="10" Width="180" Height="40" Click="btnAdd_Click" Style="{StaticResource ButtonStyle}"/>
+                <Button x:Name="btn_PointOfShape" Content="Cập nhật hồ và điểm" Margin="10" Width="180" Height="40" Click="btn_PointOfShape_Click" Style="{StaticResource ButtonStyle}"/>
             </StackPanel>
         </Grid>
     </Grid>

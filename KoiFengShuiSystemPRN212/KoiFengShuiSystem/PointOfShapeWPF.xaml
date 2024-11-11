@@ -8,45 +8,84 @@
         Title="PointOfShapeWPF" Height="750" Width="1500"
         WindowStartupLocation = "CenterScreen"
         Loaded="Window_Loaded">
-    <Grid Background="#F0F8FF">
-        <Label x:Name="labelPoint" Content="Chức Năng Tương Ứng" Margin="541,20,0,20" FontSize="36" HorizontalAlignment="Left"   FontWeight="Bold" Background="{x:Null}">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF7CA0E8" Offset="0"/>
+                        <GradientStop Color="#FF77BEF5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#385D8A"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="BorderBrush" Value="#4682B4"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Img/pointManagement.png"/>
+        </Grid.Background>
+        <Rectangle HorizontalAlignment="Left" Height="539" Margin="118,93,0,0" Stroke="Black" VerticalAlignment="Top" Width="1246" Fill="#CCFFFFFF" Opacity="0.6"/>
+
+        <Label x:Name="labelPoint" Content="Chức Năng Tương Ứng" Margin="577,22,0,18" FontSize="36" HorizontalAlignment="Left" FontFamily="Dancing Script" FontStyle="Italic">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF6AE6E3" Offset="1"/>
-                    <GradientStop Color="#FF6FDC75" Offset="0.007"/>
+                    <GradientStop Color="#FFF763C2" Offset="1"/>
+                    <GradientStop Color="#FF6A35FF" Offset="0.007"/>
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>
-        <TextBox x:Name="txtShapeId" Padding="5" Margin="382,118,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="457" Height="40"/>
-        <TextBox x:Name="txtImage" Margin="382,195,0,0"  Padding="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="40"/>
 
-        <Image x:Name="img"    Width="330" Height="271" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="905,115,0,0" />
+        <TextBox x:Name="txtShapeId" Padding="5" Margin="418,120,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="457" Height="40"/>
+        <TextBox x:Name="txtImage" Margin="418,197,0,0" Padding="5" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="40"/>
 
+        <Image x:Name="img" Width="330" Height="271" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="941,117,0,0"/>
 
+        <Label Content="Sinh Mệnh" FontSize="24" Height="50" Margin="187,267,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Dancing Script" FontStyle="Italic"/>
+        <ComboBox x:Name="cbElement" Height="41" FontSize="18" Margin="418,271,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Style="{StaticResource ComboBoxStyle}"/>
 
+        <Label Content="Tên Hồ" FontSize="24" FontFamily="Dancing Script" FontStyle="Italic" Margin="187,121,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Điểm" FontSize="24" FontFamily="Dancing Script" FontStyle="Italic" Height="44" Margin="187,340,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Label Content="Sinh Mệnh" FontSize="20" Height="50" Margin="176,265,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbPoint" Height="41" FontSize="18" Margin="418,337,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Style="{StaticResource ComboBoxStyle}"/>
+        <Button x:Name="btn_AddPoint" Content="Thêm Điểm" Click="btn_AddPoint_Click" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="41" Width="125" Margin="750,338,0,0" Style="{StaticResource ButtonStyle}"/>
+        <Button x:Name="btn_DeletePoint" Content="Xóa Điểm" Click="btn_DeletePoint_Click" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="125" Margin="750,272,0,0" Style="{StaticResource ButtonStyle}"/>
 
-        <ComboBox x:Name="cbElement" Height="41" FontSize="18" Margin="382,269,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300"/>
-
-        <Label Content="Tên Hồ" FontSize="20" Margin="176,120,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-        <Label Content="Điểm" FontSize="20" Height="44" Margin="176,337,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-        <ComboBox x:Name="cbPoint" Height="41" FontSize="18" Margin="382,335,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300"/>
-        <Button x:Name="btn_AddPoint" Content="Thêm Điểm" Click="btn_AddPoint_Click" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="41" Width="125" Margin="714,336,0,0"/>
-        <Button x:Name="btn_DeletePoint" Content="Xóa Điểm" Click="btn_DeletePoint_Click" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="125" Margin="714,270,0,0" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,630,0,0" Height="84" Width="440">
-            <Button x:Name="btn_Save" Content="Lưu" Margin="10" Width="200" Height="40" FontSize="16" Click="btn_Save_Click"/>
-
-            <Button x:Name="btn_Back" Content="Thoát"  Margin="10" Width="200" Height="40" Click="btn_Back_Click" FontSize="16"  />
-
-           
-
+            <Button x:Name="btn_Save" Content="Lưu" Margin="10" Width="200" Height="40" FontSize="16" Click="btn_Save_Click" Style="{StaticResource ButtonStyle}"/>
+            <Button x:Name="btn_Back" Content="Thoát" Margin="10" Width="200" Height="40" Click="btn_Back_Click" FontSize="16"  Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
-        <Label Content="Đường dẫn hình ảnh" FontSize="20" Height="44" Margin="176,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <ListBox x:Name="ListPoint" Grid.Column="0" Margin="188,420,244,132" FontSize="21" FontWeight="Medium" FontFamily="Arial" >
+
+        <Label Content="Đường dẫn hình ảnh" FontSize="24" FontFamily="Dancing Script" FontStyle="Italic" Height="44" Margin="187,197,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ListBox x:Name="ListPoint" Grid.Column="0" Margin="187,422,208,130" FontSize="21" FontWeight="Medium" FontFamily="Arial">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -57,6 +96,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="btn_SelectImage" Content="Chọn File"  FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="41" Width="126" Margin="714,194,0,0" Click="btn_SelectImage_Click" />
+        <Button x:Name="btn_SelectImage" Content="Chọn File" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" Height="41" Width="126" Margin="750,196,0,0" Click="btn_SelectImage_Click" Style="{StaticResource ButtonStyle}"/>
     </Grid>
 </Window>

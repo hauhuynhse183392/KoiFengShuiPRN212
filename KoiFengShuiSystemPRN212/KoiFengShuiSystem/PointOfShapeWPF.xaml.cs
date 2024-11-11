@@ -117,6 +117,11 @@ namespace KoiFengShuiSystem
 
                 txtImage.Text = openFileDialog.FileName;
             }
+            if (File.Exists(txtImage.Text))
+            {
+
+                img.Source = new BitmapImage(new Uri(txtImage.Text, UriKind.Absolute));
+            }
         }
         private async void btn_DeletePoint_Click(object sender, RoutedEventArgs e)
         {
