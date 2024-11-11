@@ -47,9 +47,9 @@ namespace KoiFengShuiSystem
 
         private void btn_logout_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
             LoginWPF loginWPF = new LoginWPF();
             loginWPF.Show();
+            Window.GetWindow(this)?.Close();
         }
     }
 }

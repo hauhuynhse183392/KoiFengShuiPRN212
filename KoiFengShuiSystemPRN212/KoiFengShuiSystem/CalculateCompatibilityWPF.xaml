@@ -86,7 +86,7 @@
             <StackPanel Margin="20">
                 <!-- Header -->
                 <TextBlock Text="Tính toán độ tương hợp"
-                           FontSize="28"
+                           FontSize="30"
                            FontWeight="Bold"
                            Foreground="White"
                            HorizontalAlignment="Center"
@@ -94,7 +94,7 @@
 
                 <!-- User Information -->
                 <GroupBox Header="Thông Tin Người Dùng" BorderBrush="#FF5F59A7" BorderThickness="1"
-                        Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                        Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF" FontSize="18">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" Foreground="#FCFFFFFF" FontWeight="Bold" Background="#FF4159B7"/>
@@ -110,35 +110,36 @@
                         <!-- Column 0: Birth Date -->
                         <StackPanel Grid.Column="0"
                                     Margin="5">
-                            <Label Content="Ngày tháng năm sinh"/>
+                            <Label Content="Ngày tháng năm sinh" FontSize="16"/>
                             <DatePicker x:Name="BirthDatePicker"
-                                        Margin="0,0,10,10"/>
+                                        Margin="0,0,10,10" FontSize="16"/>
                         </StackPanel>
 
                         <!-- Column 1: Gender -->
                         <StackPanel Grid.Column="1"
                                     Margin="5">
-                            <Label Content="Giới tính"/>
+                            <Label Content="Giới tính" FontSize="16"/>
                             <StackPanel Orientation="Horizontal">
                                 <RadioButton Content="Nam"
                                              x:Name="MaleRadio"
-                                             Margin="0,0,20,0"/>
+                                             Margin="0,0,20,0" FontSize="16" />
                                 <RadioButton Content="Nữ"
-                                             x:Name="FemaleRadio"/>
+                                             x:Name="FemaleRadio" FontSize="16"/>
                             </StackPanel>
                         </StackPanel>
 
                         <!-- Column 2: Element Calculation -->
                         <StackPanel Grid.Column="2"
                                     Margin="5">
-                            <Label Content="Mệnh của người dùng"/>
+                            <Label Content="Mệnh của người dùng" FontSize="16"/>
                             <Button x:Name="btnCalculateElement"
                                     Content="Tính toán mệnh"
                                     Margin="0,0,0,10"
                                     Style="{StaticResource ButtonStyle}"
-                                    Click="CalculateElement_Click"/>
+                                    Click="CalculateElement_Click" FontSize="16"/>
                             <TextBlock x:Name="txtElementResult"
                                        TextWrapping="Wrap"
+                                       TextAlignment="Center"
                                        MinHeight="30"
                                        Padding="5"
                                        Background="#F5F5F5"/>
@@ -147,7 +148,7 @@
                 </GroupBox>
 
                 <!-- Fish Selection -->
-                <GroupBox Header="Chọn Loại Cá" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Chọn Loại Cá" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF" FontSize="18">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
@@ -184,7 +185,7 @@
                                     Content="Tìm kiếm"
                                     Width="80"
                                     Style="{StaticResource ButtonStyle}"
-                                    Margin="10,0"/>
+                                    Margin="10,0" Click="btnSearch_Click"/>
                             <Button x:Name="btnReset"
                                     Content="Đặt lại"
                                     Width="80"
@@ -276,7 +277,7 @@
                 </GroupBox>
 
                 <!-- Pond Shape -->
-                <GroupBox Header="Hình Dáng Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Hình Dáng Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF" FontSize="18">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
@@ -341,7 +342,7 @@
                 </GroupBox>
 
                 <!-- Pond Direction -->
-                <GroupBox Header="Hướng Đặt Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF">
+                <GroupBox Header="Hướng Đặt Hồ" BorderBrush="#FF4159B7" BorderThickness="1" Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF" FontSize="18">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"  Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
@@ -370,7 +371,7 @@
                           x:Name="ResultsSection"
                           BorderBrush="#FF5F59A7" BorderThickness="1"
                           Style="{StaticResource GroupBoxStyle}" Background="#CCFFFFFF"
-                          Visibility="Collapsed">
+                          Visibility="Collapsed" FontSize="18">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" Foreground="White" FontWeight="Bold" Background="#FF4159B7"/>
@@ -384,7 +385,7 @@
                                    Margin="0,0,0,10"/>
                         <TextBlock x:Name="CompatibilityComment"
                                    TextWrapping="Wrap"
-                                   FontSize="14"
+                                   FontSize="18"
                                    LineHeight="24"/>
                     </StackPanel>
                 </GroupBox>

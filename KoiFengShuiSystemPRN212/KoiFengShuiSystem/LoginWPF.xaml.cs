@@ -37,14 +37,14 @@ namespace KoiFengShuiSystem
                 {
                     HomePageWPF homePage = new HomePageWPF();
                     homePage.Show();
-                    this.Hide();
+                    this.Close();
 
                 }
                 if (account.Role.Equals("Admin"))
                 {
                     AdminWPF adminPage = new AdminWPF();
                     adminPage.Show();
-                    this.Hide();
+                    this.Close();
                 }
             }
             else
@@ -62,7 +62,7 @@ namespace KoiFengShuiSystem
         {
             RegisterWPF register = new RegisterWPF();
             register.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

@@ -97,9 +97,10 @@ namespace KoiFengShuiSystem
 
         }
 
-        private void btn_Reset(object sender, RoutedEventArgs e)
+        private async void btn_Reset(object sender, RoutedEventArgs e)
         {
             FishListView.SelectedItem = null;
+            FishListView.ItemsSource = await _koiVarietyService.GetKoiVarieties();
 
             // Bỏ chọn RadioButton trong PondShapeList
             foreach (var item in PondShapeList.Items)
@@ -114,7 +115,7 @@ namespace KoiFengShuiSystem
                     }
                 }
             }
-
+            SearchBox.Text = null;
             // Reset ComboBox Direction
             DirectionComboBox.SelectedItem = null;
             ElementFilter.SelectedItem = null ;
@@ -126,7 +127,7 @@ namespace KoiFengShuiSystem
             ResultsSection.Visibility = Visibility.Collapsed;
         }
 
-        private async void btn_Search(object sender, RoutedEventArgs e)
+        private async void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             try
             {
