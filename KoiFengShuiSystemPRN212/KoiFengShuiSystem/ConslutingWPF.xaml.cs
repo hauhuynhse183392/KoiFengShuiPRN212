@@ -99,5 +99,7 @@ namespace KoiFengShuiSystem
             QuantityOfFish quantity = await quantityOfFishService.getQuantityByElement(element);
             suitableQuantityTextBlock.Text = quantity.Description;
         }
+
+      
     }
 }

@@ -5,126 +5,276 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="ConslutingWPF" Height="800" Width="1600"
-        WindowStartupLocation="CenterScreen" RenderTransformOrigin="0.5,0.5"
-        >
+        Title="Tư vấn Phong Thủy Cá Koi" Height="800" Width="1600"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Background>
-        <ImageBrush Opacity="0.9" TileMode="FlipY" ImageSource="Img/koi20.jpg"/>
+        <ImageBrush ImageSource="Img/koi20.jpg" 
+                    Opacity="0.9" 
+                    TileMode="None"/>
     </Window.Background>
+
     <Window.Resources>
-        <!-- Global style for all Labels -->
-        <Style TargetType="Label">
+        <!-- Gradient Background for Labels -->
+        <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#FF15B189" Offset="0"/>
+            <GradientStop Color="#FF0E8A68" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Label Style -->
+        <Style x:Key="CustomLabelStyle" TargetType="Label">
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource HeaderGradient}"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- Button Style -->
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource HeaderGradient}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#FF0E8A68" Offset="0"/>
+                                <GradientStop Color="#FF0A6B4F" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- DataGrid Style -->
+        <Style x:Key="CustomDataGridStyle" TargetType="DataGrid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="#FFE39D7B" Opacity="0.85"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="GridLinesVisibility" Value="All"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="BorderBrush" Value="#FF15B189"/>
+        </Style>
+
+        <!-- TextBlock Container Style -->
+        <Style x:Key="ResultTextBlockStyle" TargetType="Border">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="#FFE39D7B" Opacity="0.85"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#FF15B189"/>
+        </Style>
+
+        <!-- ComboBox Style -->
+        <Style x:Key="CustomComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="BorderBrush" Value="#FF15B189"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <!-- DatePicker Style -->
+        <Style x:Key="CustomDatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="BorderBrush" Value="#FF15B189"/>
+            <Setter Property="Background" Value="White"/>
         </Style>
     </Window.Resources>
-    <Window.Foreground>
-        <ImageBrush ImageSource="Img/koi20.jpg"/>
-    </Window.Foreground>
 
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="707*"/>
-            <ColumnDefinition Width="93*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
-        <Label Content="Tư vấn Cung mệnh và Sinh mệnh" HorizontalAlignment="Left" Margin="533,50,0,0" VerticalAlignment="Top" FontSize="36" Background="#FF15B189"/>
+        <!-- Header -->
+        <Label Content="Tư vấn Cung mệnh và Sinh mệnh" 
+               Grid.Row="0"
+               Style="{StaticResource CustomLabelStyle}"
+               FontSize="36"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,30"/>
 
-        <Label Content="Ngày sinh:" HorizontalAlignment="Left" Margin="107,140,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
-        <DatePicker x:Name="birthDatePicker" HorizontalAlignment="Left" Margin="248,149,0,0" VerticalAlignment="Top" Width="200" FontSize="20" Background="#FF15B189" />
+        <!-- Input Section -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <Label Content="Giới tính:" HorizontalAlignment="Left" Margin="107,217,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
-        <ComboBox x:Name="genderComboBox" HorizontalAlignment="Left" Margin="248,221,0,0" VerticalAlignment="Top" Width="200" FontSize="20">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="#FF0D81F4" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-            <ComboBoxItem Content="Nam"/>
-            <ComboBoxItem Content="Nữ"/>
-        </ComboBox>
+            <!-- Left Input -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                <Label Content="Ngày sinh:" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20"/>
+                <DatePicker x:Name="birthDatePicker" 
+                          Width="200"
+                          Height="35"
+                          FontSize="20"
+                          Margin="0,5,0,15"
+                          Style="{StaticResource CustomDatePickerStyle}"/>
 
-        <Button x:Name="calculateButton" Content="Tính toán" HorizontalAlignment="Left" Margin="184,320,0,0" VerticalAlignment="Top" Width="200" Height="50" FontSize="20" Click="calculateButton_Click" BorderBrush="#FF707070" RenderTransformOrigin="0.5,0.5" Background="#FF15B189" Foreground="White"/>
+                <Label Content="Giới tính:" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20"/>
+                <ComboBox x:Name="genderComboBox" 
+                         Width="200"
+                         Height="35"
+                         FontSize="20"
+                         Style="{StaticResource CustomComboBoxStyle}">
+                    <ComboBoxItem Content="Nam"/>
+                    <ComboBoxItem Content="Nữ"/>
+                </ComboBox>
+            </StackPanel>
 
-        <Label Content="Thông tin người dùng" HorizontalAlignment="Left" Margin="113,431,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
-        <TextBlock x:Name="resultTextBlock" HorizontalAlignment="Left" Margin="113,485,0,0" VerticalAlignment="Top" FontSize="20" Width="400" TextWrapping="Wrap" Foreground="White" Height="264">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
-            </TextBlock.Background>
-        </TextBlock>
+            <!-- Center Result - Fixed Size -->
+            <StackPanel Margin="44,12,206,-12" Grid.ColumnSpan="2">
+                <Label Content="Thông tin người dùng" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20" Width="858"/>
+                <Border Style="{StaticResource ResultTextBlockStyle}" Width="860">
+                    <TextBlock x:Name="resultTextBlock" 
+                               FontSize="20"
+                               Foreground="White"
+                               TextWrapping="Wrap"
+                               Padding="15"
+                               Height="80" Width="788"/>
+                </Border>
+            </StackPanel>
 
-        <Label Content="Hướng phù hợp:" HorizontalAlignment="Left" Margin="1127,478,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
-        <TextBlock x:Name="suitableDirectionsTextBlock" HorizontalAlignment="Left" Margin="1176,535,0,0" VerticalAlignment="Top" FontSize="20" Width="330" TextWrapping="Wrap" Foreground="#FFF6F6F6" Height="52" Grid.ColumnSpan="2">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
-            </TextBlock.Background>
-        </TextBlock>
+            <!-- Calculate Button -->
+            <Button Grid.Column="1"
+                    x:Name="calculateButton" 
+                    Content="Tính toán"
+                    Style="{StaticResource CustomButtonStyle}"
+                    FontSize="20"
+                    Click="calculateButton_Click" Margin="956,29,83,45"/>
+        </Grid>
 
-        <Label Content="Cá phù hợp:" HorizontalAlignment="Left" Margin="575,140,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
-        <DataGrid x:Name="koiDataGrid" HorizontalAlignment="Left" Margin="748,149,0,0" VerticalAlignment="Top" Width="758" Height="300" AutoGenerateColumns="False" Grid.ColumnSpan="2" Foreground="#FF0B0B0B">
-            <DataGrid.Background>
-                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
-            </DataGrid.Background>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Tên cá" Binding="{Binding KoiType}" Width="200"/>
+        <!-- Results Section - Fixed Sizes -->
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="350"/>
+            </Grid.ColumnDefinitions>
 
-                <DataGridTemplateColumn Header="Hình ảnh" Width="200">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Image}" Width="60" Height="100"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Mô tả" Width="400">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Description}" 
-                                       TextWrapping="Wrap"
-                                       MaxHeight="100"
-                                       ToolTip="{Binding Description}">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="MaxHeight" Value="Infinity"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+            <!-- Koi Grid - Fixed Size -->
+            <StackPanel Grid.Column="0">
+                <Label Content="Cá phù hợp:" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20"/>
+                <DataGrid x:Name="koiDataGrid"
+                         Style="{StaticResource CustomDataGridStyle}"
+                         Height="381"
+                         AutoGenerateColumns="False"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tên cá" 
+                                          Binding="{Binding KoiType}" 
+                                          Width="200"/>
+                        <DataGridTemplateColumn Header="Hình ảnh" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Image}" 
+                                           Width="60" 
+                                           Height="100"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Mô tả" 
+                                              Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}" 
+                                             TextWrapping="Wrap"
+                                             MaxHeight="100"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
-        <Label Content="Hồ phù hợp:" HorizontalAlignment="Left" Margin="575,470,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189"/>
-        <DataGrid x:Name="pondDataGrid" HorizontalAlignment="Left" Margin="748,479,0,0" VerticalAlignment="Top" Width="350" Height="270" AutoGenerateColumns="False" Foreground="Black">
-            <DataGrid.Background>
-                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
-            </DataGrid.Background>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Hình dạng" Binding="{Binding ShapeId}" Width="100"/>
+            <!-- Pond Grid - Fixed Size -->
+            <StackPanel Grid.Column="1" Margin="20,0">
+                <Label Content="Hồ phù hợp:" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20"/>
+                <DataGrid x:Name="pondDataGrid"
+                         Style="{StaticResource CustomDataGridStyle}"
+                         Height="381"
+                         Width="356"
+                         AutoGenerateColumns="False"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto" RenderTransformOrigin="0.612,0.51">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Hình dạng" 
+                                          Binding="{Binding ShapeId}" 
+                                          Width="100"/>
+                        <DataGridTemplateColumn Header="Hình ảnh" 
+                                              Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Image}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
-                <DataGridTemplateColumn Header="Hình ảnh" Width="200">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Image}" Width="auto" Height="auto"/>
+            <!-- Direction and Quantity - Fixed Sizes -->
+            <StackPanel Grid.Column="2" Margin="20,0">
+                <Label Content="Hướng phù hợp:" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20"/>
+                <Border Style="{StaticResource ResultTextBlockStyle}">
+                    <TextBlock x:Name="suitableDirectionsTextBlock"
+                               FontSize="20"
+                               Foreground="White"
+                               TextWrapping="Wrap"
+                               Padding="15"
+                               Height="100"/>
+                </Border>
 
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label Content="Số lượng cá&#xA;" HorizontalAlignment="Left" Margin="1127,608,0,0" VerticalAlignment="Top" FontSize="20" Background="#FF15B189" Height="34"/>
-        <TextBlock x:Name="suitableQuantityTextBlock" HorizontalAlignment="Left" Margin="1176,660,0,0" VerticalAlignment="Top" FontSize="20" Width="330" TextWrapping="Wrap" Foreground="White" Height="89" Grid.ColumnSpan="2">
-            <TextBlock.Background>
-                <SolidColorBrush Color="#FFE39D7B" Opacity="0.7"/>
-            </TextBlock.Background>
-        </TextBlock>
+                <Label Content="Số lượng cá" 
+                       Style="{StaticResource CustomLabelStyle}"
+                       FontSize="20"
+                       Margin="0,20,0,0"/>
+                <Border Style="{StaticResource ResultTextBlockStyle}">
+                    <TextBlock x:Name="suitableQuantityTextBlock"
+                               FontSize="20"
+                               Foreground="White"
+                               TextWrapping="Wrap"
+                               Padding="15"
+                               Height="208"/>
+                </Border>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
