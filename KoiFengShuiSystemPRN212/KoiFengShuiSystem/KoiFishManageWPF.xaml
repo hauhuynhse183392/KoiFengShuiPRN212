@@ -7,7 +7,18 @@
         mc:Ignorable="d"
         Title="KoiFishManageWPF" Height="800" Width="1500" Loaded="Window_Loaded"
         WindowStartupLocation = "CenterScreen">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="searchColor" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#6A1B9A" Offset="0"/>
+            <!-- Tím đậm -->
+            <GradientStop Color="#BA68C8" Offset="1"/>
+            <!-- Tím nhạt -->
+        </LinearGradientBrush>
+    </Window.Resources>
     <Grid Margin="0,0,0,-6">
+        <Grid.Background>
+            <ImageBrush ImageSource="Img/koiManage1.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
@@ -100,7 +111,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Tìm kiếm cá theo giống" HorizontalAlignment="Left" Margin="130,272,0,0" VerticalAlignment="Top" Height="56" Width="221" FontSize="20" Foreground="#6A0572"/>
+            <Label Content="Tìm kiếm cá theo giống" HorizontalAlignment="Left" Margin="130,272,0,0" VerticalAlignment="Top" Height="56" Width="221" FontSize="20" Foreground="{StaticResource searchColor}"/>
             <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Margin="418,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="457" Height="56"/>
             <Button x:Name="btnSearch" Content="Tìm kiếm" HorizontalAlignment="Left" Height="55" Margin="982,273,0,0" VerticalAlignment="Top" Width="105" Click="btnSearch_Click">
                 <Button.Background>

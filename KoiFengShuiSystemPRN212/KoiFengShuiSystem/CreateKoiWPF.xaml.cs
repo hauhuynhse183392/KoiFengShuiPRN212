@@ -1,5 +1,6 @@
 ﻿using FengShuiKoi_BO;
 using FengShuiKoi_Services;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -170,6 +171,20 @@ namespace KoiFengShuiSystem
             else
             {
                 MessageBox.Show(EditKoiVariety == null ? "Thêm cá Koi thất bại." : "Cập nhật cá Koi thất bại");
+            }
+        }
+
+        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png",
+                Title = "Chọn hình ảnh từ máy của bạn"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                TxtImage.Text = openFileDialog.FileName;
             }
         }
     }

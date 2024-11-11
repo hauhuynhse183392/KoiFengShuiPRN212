@@ -26,23 +26,26 @@ namespace KoiFengShuiSystem
         }
         private void btn_ManageUser_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
+
             UserManageWPF userManageWPF = new UserManageWPF();
             userManageWPF.Show();
+            Window.GetWindow(this)?.Close();
         }
 
         private void btn_ManageKoi_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
+
             KoiFishManageWPF koiFishManageWPF = new KoiFishManageWPF();
             koiFishManageWPF.Show();
+            Window.GetWindow(this)?.Close();
         }
 
         private void btn_ManagePond_Click(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this)?.Close();
+
             PondManageWPF pondManageWPF = new PondManageWPF();
             pondManageWPF.Show();
+            Window.GetWindow(this)?.Close();
         }
 
         private void btn_logout_Click(object sender, RoutedEventArgs e)

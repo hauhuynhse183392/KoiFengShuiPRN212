@@ -5,8 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KoiFengShuiSystem"
         mc:Ignorable="d"
-        Title="CreateKoiWPF" Height="600" Width="800" Loaded="Window_Loaded">
-    <Grid Margin="20">
+        Title="CreateKoiWPF" Height="600" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="YourGradientBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFFF" Offset="0"/>
+            <GradientStop Color="#A0D8E1" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="LabelContent" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFFF" Offset="0"/>
+            <GradientStop Color="#F8BBD0" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="Img/createKoi.jpg"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,28 +36,73 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Label x:Name="CreateKoiLabel" Content="Tạo / Sửa cá Koi" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,20"/>
+        <Label x:Name="CreateKoiLabel" Content="Tạo / Sửa cá Koi" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="16" Margin="0,0,0,20" Background="{StaticResource YourGradientBrush}"/>
 
-        <Label Content="KoiType" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox x:Name="TxtKoiType" Grid.Row="1" Grid.Column="1" Height="25" Margin="5"/>
-        <Button x:Name="btnSave" Content="Save" Grid.Row="1" Grid.Column="2" Width="80" Height="30" Click="btnSave_Click"/>
+        <Label Content="KoiType" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Background="{StaticResource LabelContent}"/>
+        <TextBox x:Name="TxtKoiType" Grid.Row="1" Grid.Column="1" Height="25" Margin="5,5,215,5"/>
+        <Button x:Name="btnSave" Content="Save" Grid.Row="1" Grid.Column="2" Width="80" Height="30" Click="btnSave_Click">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF6F20" Offset="0.0" />
+                    <GradientStop Color="#E63946" Offset="1.0" />
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Foreground>
+                <SolidColorBrush Color="#FFFFFF" />
+            </Button.Foreground>
+        </Button>
 
-        <Label Content="Image" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox x:Name="TxtImage" Grid.Row="2" Grid.Column="1" Height="25" Margin="5"/>
-        <Button x:Name="btnCancel" Content="Cancel" Grid.Row="2" Grid.Column="2" Width="80" Height="30" Click="btnCancel_Click"/>
+        <Label Content="Image" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Background="{StaticResource LabelContent}"/>
 
-        <Label Content="Description:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Margin="0,5,0,0"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="5,5,128,5">
+            <TextBox x:Name="TxtImage" Height="25" Width="401"/>
+            <Button x:Name="btnBrowse" Content="Browse" Width="86" Height="25" Click="btnBrowse_Click">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF6F20" Offset="0.0" />
+                        <GradientStop Color="#E63946" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Foreground>
+                    <SolidColorBrush Color="#FFFFFF" />
+                </Button.Foreground>
+            </Button>
+        </StackPanel>
+
+        <Button x:Name="btnCancel" Content="Cancel" Grid.Row="2" Grid.Column="2" Width="80" Height="30" Click="btnCancel_Click">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF6F20" Offset="0.0" />
+                    <GradientStop Color="#E63946" Offset="1.0" />
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Foreground>
+                <SolidColorBrush Color="#FFFFFF" />
+            </Button.Foreground>
+        </Button>
+
+        <Label Content="Description:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Margin="0,5,0,0" Background="{StaticResource LabelContent}"/>
         <TextBox x:Name="TxtDescription" Grid.Row="3" Grid.Column="1" Height="60" Margin="5" TextWrapping="Wrap"/>
 
-        <Label Content="Element" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5,0,0"/>
+        <Label Content="Element" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,5,0,0" Background="{StaticResource LabelContent}"/>
         <ComboBox x:Name="CmbElement" Grid.Row="4" Grid.Column="1" Height="25" Margin="5" Width="150" HorizontalAlignment="Left"/>
 
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,10">
-            <Label Content="Color ID:"/>
+            <Label Content="Color ID:" Background="{StaticResource LabelContent}"/>
             <ComboBox x:Name="CmbColorId" Width="150" Height="25" Margin="5,0"/>
-            <Label Content="Percentage:" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <Label Content="Percentage:" VerticalAlignment="Center" Margin="20,0,0,0" Background="{StaticResource LabelContent}"/>
             <TextBox x:Name="TxtPercentage" Width="150" Height="25" Margin="5,0"/>
-            <Button x:Name="btnAddColor" Content="Add Color" Width="80" Height="25" Margin="20,0,0,0" Click="btnAddColor_Click"/>
+            <Button x:Name="btnAddColor" Content="Add Color" Width="80" Height="25" Margin="20,0,0,0" Click="btnAddColor_Click">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#FF6F20" Offset="0.0" />
+                        <GradientStop Color="#E63946" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Foreground>
+                    <SolidColorBrush Color="#FFFFFF" />
+                </Button.Foreground>
+            </Button>
         </StackPanel>
 
         <ListBox x:Name="ListColors" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10" Height="100">
@@ -58,6 +116,17 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button x:Name="btnRemoveColor" Content="Remove Color" Grid.Row="7" Width="100" Height="25" HorizontalAlignment="Center" Margin="0,10,0,0" Click="btnRemoveColor_Click" VerticalAlignment="Top"/>
+        <Button x:Name="btnRemoveColor" Content="Remove Color" Grid.Row="7" Width="100" Height="25" HorizontalAlignment="Center" Margin="0,10,0,0" Click="btnRemoveColor_Click" VerticalAlignment="Top">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#FF6F20" Offset="0.0" />
+                    <GradientStop Color="#E63946" Offset="1.0" />
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Foreground>
+                <SolidColorBrush Color="#FFFFFF" />
+            </Button.Foreground>
+        </Button>
+
     </Grid>
 </Window>

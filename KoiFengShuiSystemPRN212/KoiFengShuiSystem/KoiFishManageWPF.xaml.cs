@@ -36,6 +36,7 @@ namespace KoiFengShuiSystem
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             CreateKoiWPF createKoiWPF = new CreateKoiWPF();
+            createKoiWPF.Owner = this;
             createKoiWPF.ShowDialog();
             loadInit();
         }
